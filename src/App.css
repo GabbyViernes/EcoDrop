@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+:root {
+  --cafe-noir: #4C3D19;
+  --kombu-green: #354024;
+  --moss-green: #889063;
+  --tan: #CFBB99;
+  --bone: #E5D7C4;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--bone);
+  color: var(--cafe-noir);
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Sidebar Branding */
+.sidebar {
+  background-color: var(--kombu-green);
+  color: var(--bone);
+  width: 250px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 20px;
+}
+
+.sidebar h2 { color: var(--tan); }
+
+/* Card Styling */
+.card {
+  background-color: white;
+  border-left: 5px solid var(--moss-green);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Bin Table Header */
+thead {
+  background-color: var(--moss-green);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Progress Bar (Eco-themed) */
+.progress-bar {
+  background: var(--tan);
+  height: 8px;
+  border-radius: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.fill-normal { background-color: var(--kombu-green); }
+.fill-critical { background-color: var(--cafe-noir); } /* Using Cafe Noir for alerts */
