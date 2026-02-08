@@ -1,5 +1,7 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import LandingPage from './LandingPage';
+import AboutPage from './AboutPage';
 
 // Simulating data from your Laravel Backend
 const adminData = {
@@ -18,6 +20,31 @@ const binStatus = [
 ];
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'about', or 'dashboard'
+
+  const handleLogin = () => {
+    setCurrentPage('dashboard');
+  };
+
+  const handleAbout = () => {
+    setCurrentPage('about');
+  };
+
+  const handleBackToLanding = () => {
+    setCurrentPage('landing');
+  };
+
+  // Show Landing Page
+  if (currentPage === 'landing') {
+    return <LandingPage onLogin={handleLogin} onAbout={handleAbout} />;
+  }
+
+  // Show About Page
+  if (currentPage === 'about') {
+    return <AboutPage onBack={handleBackToLanding} />;
+  }
+
+  // Show Dashboard
   return (
     <div className="admin-container">
       {/* Sidebar Navigation */}
