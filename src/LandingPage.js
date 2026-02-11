@@ -16,7 +16,6 @@ function LandingPage({ onLogin, onAbout }) {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // For now, just redirect to dashboard
     onLogin();
   };
 

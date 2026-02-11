@@ -24,7 +24,6 @@ function AboutPage({ onBack }) {
         </div>
 
         <div className="content-grid">
-          {/* Problem Statement */}
           <div className="info-card problem-card">
             <div className="card-icon">🌍</div>
             <h2>The Problem</h2>
@@ -36,7 +35,6 @@ function AboutPage({ onBack }) {
             </p>
           </div>
 
-          {/* Our Solution */}
           <div className="info-card solution-card">
             <div className="card-icon">💡</div>
             <h2>Our Solution</h2>
@@ -47,7 +45,6 @@ function AboutPage({ onBack }) {
             </p>
           </div>
 
-          {/* Target Users */}
           <div className="info-card users-card">
             <div className="card-icon">👥</div>
             <h2>Who We Serve</h2>
@@ -56,7 +53,6 @@ function AboutPage({ onBack }) {
             </ul>
           </div>
 
-          {/* How It Works */}
           <div className="info-card steps-card full-width">
             <h2>How It Works</h2>
             <div className="steps-container">
@@ -86,7 +82,6 @@ function AboutPage({ onBack }) {
             </div>
           </div>
 
-          {/* Impact */}
           <div className="info-card impact-card full-width">
             <h2>Our Environmental Impact</h2>
             <div className="impact-stats">
