@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import LandingPage from './LandingPage';
-import AboutPage from './AboutPage';
+import LandingPage from './pages/LandingPage';
+import AboutPage from './pages/AboutPage';
 
 // Simulating data from your Laravel Backend
 const adminData = {

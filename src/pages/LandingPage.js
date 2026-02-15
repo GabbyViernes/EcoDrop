@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './LandingPage.css';
-import backgroundImage from './assets/images/EcoDrop-WebBG.png';
-import logoWord from './assets/images/EcoDropLogoWord.png';
+import '../styles/LandingPage.css';
+import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
+import logoWord from '../assets/images/EcoDropLogoWord.png';
 
 function LandingPage({ onLogin, onAbout }) {
   const [showLoginForm, setShowLoginForm] = useState(false);

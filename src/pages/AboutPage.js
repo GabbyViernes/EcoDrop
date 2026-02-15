@@ -1,7 +1,7 @@
 import React from 'react';
-import './AboutPage.css';
-import backgroundImage from './assets/images/EcoDrop-AboutBG.png';
-import logoWord from './assets/images/EcoDropLogoWord.png';
+import '../styles/AboutPage.css';
+import backgroundImage from '../assets/images/EcoDrop-AboutBG.png';
+import logoWord from '../assets/images/EcoDropLogoWord.png';
 
 function AboutPage({ onBack }) {
   return (
