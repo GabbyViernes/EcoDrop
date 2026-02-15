@@ -10,6 +10,7 @@ function App() {
   const handleLogin = () => setCurrentPage('dashboard');
   const handleAbout = () => setCurrentPage('about');
   const handleBackToLanding = () => setCurrentPage('landing');
+  const handleLogout = () => setCurrentPage('landing');
 
   if (currentPage === 'landing') {
     return <LandingPage onLogin={handleLogin} onAbout={handleAbout} />;
@@ -19,9 +20,12 @@ function App() {
     return <AboutPage onBack={handleBackToLanding} />;
   }
 
-  // Render separated Dashboard component
   if (currentPage === 'dashboard') {
     return <DashboardPage />;
+  }
+
+  if (currentPage === 'dashboard') {
+    return <DashboardPage onLogout={handleLogout} />; 
   }
 
   return null;

@@ -21,6 +21,66 @@
   padding: 30px 20px;
 }
 
+.dashboard-header {
+  display: flex;
+  justify-content: space-between; /* Keeps Search on left, Icons on right */
+  align-items: center;
+  padding: 20px 30px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Keeps header above page content */
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* This prevents the container from expanding horizontally */
+  flex-shrink: 0; 
+}
+
+/* Parent container: MUST be relative so menu anchors to it */
+.dropdown-wrapper {
+  position: relative; 
+  display: flex;
+  align-items: center;
+}
+
+/* THE FIX: Absolute positioning keeps it from "taking up space" */
+.dropdown-menu {
+  position: absolute; 
+  top: calc(100% + 15px); /* Moves it below the header */
+  right: 0;               /* Aligns to the right edge of the icon */
+  background: white;
+  min-width: 200px;       /* Set a fixed width so it doesn't vary */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+  z-index: 9999;          /* Extremely high to stay on top of everything */
+  list-style: none;
+  padding: 8px 0;
+  border: 1px solid var(--tan);
+  /* Prevents text wrapping which can stretch the menu */
+  white-space: nowrap; 
+}
+
+/* Ensure icons/text inside the trigger stay aligned */
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--moss-green);
+  border-radius: 50%;
+  border: 2px solid var(--tan);
+  flex-shrink: 0; /* Prevents circle from squishing */
+}
+
 .nav-menu ul {
   list-style: none;
   padding: 0;

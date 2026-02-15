@@ -1,8 +1,30 @@
+import React, { useState } from 'react';
+import { useRef, useEffect } from 'react';      
 import '../styles/DashboardPage.css';
-import BinMapImage from '../assets/images/BinMapImage.png'; // Placeholder for the Figma-designed map
+import BinMapImage from '../assets/images/BinMapImage.png'; 
 
-const DashboardPage = () => {
-  // Mock data for the analytics and bin monitoring
+const DashboardPage = (onLogout) => {
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
+  
+    const settingsRef = useRef(null);
+    const profileRef = useRef(null);
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    // Close settings if clicked outside
+    if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+      setShowSettingsMenu(false);
+    }
+    // Close profile if clicked outside
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setShowProfileMenu(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
   const stats = [
     { label: "Total Plastic Diverted", value: "1,240 kg", icon: "🌱" },
     { label: "Active User Growth", value: "+15%", icon: "📈" },
@@ -36,12 +58,56 @@ const DashboardPage = () => {
           <div className="search-bar">
             <input type="text" placeholder="Search transactions, user IDs, or bins..." />
           </div>
-          <div className="admin-profile">
-            <span>Administrator</span>
-            <div className="profile-circle"></div>
+          
+          <div className="header-controls">
+            {/* SETTINGS ICON & DROPDOWN */}
+            <div className="dropdown-wrapper" ref={settingsRef}>
+              <button 
+                className="icon-button" 
+                onClick={() => { 
+                  setShowSettingsMenu(!showSettingsMenu); 
+                  setShowProfileMenu(false); 
+                }}
+              >
+                ⚙️
+              </button>
+              {showSettingsMenu && (
+                <ul className="dropdown-menu">
+                  <li>Settings</li>
+                  <li>Help Center</li>
+                  <li className="menu-divider"></li>
+                  <li>System Health</li>
+                </ul>
+              )}
+            </div>
+
+            {/* PROFILE ICON & DROPDOWN */}
+            <div className="dropdown-wrapper" ref={profileRef}>
+              <div 
+                className="profile-trigger" 
+                onClick={() => { 
+                  setShowProfileMenu(!showProfileMenu); 
+                  setShowSettingsMenu(false); 
+                }}
+              >
+                <span>Admin</span>
+                <div className="profile-circle"></div>
+              </div>
+              {showProfileMenu && (
+                <ul className="dropdown-menu floating">
+                  <li>Edit Profile</li>
+                  <li>Switch Account</li>
+                  <li>Activity Log</li>
+                  <li className="menu-divider"></li>
+                  <li className="logout-option" onClick={onLogout}>Logout</li>
+                </ul>
+              )}
+            </div>
           </div>
         </header>
 
+
+        
         {/* 4. SUSTAINABILITY ANALYTICS */}
         <section className="analytics-grid">
           {stats.map((stat, index) => (
