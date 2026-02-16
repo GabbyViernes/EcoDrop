@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import { useRef, useEffect } from 'react';      
+import React, { useState, useRef, useEffect } from 'react';
+import Sidebar from '../components/Sidebar';
+import StatCard from '../components/StatCard';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png'; 
 
-const DashboardPage = (onLogout) => {
+const DashboardPage = ({onLogout}) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-  
-    const settingsRef = useRef(null);
-    const profileRef = useRef(null);
+
+  const settingsRef = useRef(null);
+  const profileRef = useRef(null);
+
+  const stats = [
+    { label: "Total Plastic Diverted", value: "1,240 kg", icon: "🌱" },
+    { label: "Active User Growth", value: "+15%", icon: "📈" },
+    { label: "Total Rewards Claimed", value: "850", icon: "🎁" }
+  ];
 
 useEffect(() => {
   const handleClickOutside = (event) => {
     // Close settings if clicked outside
-    if (settingsRef.current && !settingsRef.current.contains(event.target)) {
-      setShowSettingsMenu(false);
-    }
+
     // Close profile if clicked outside
     if (profileRef.current && !profileRef.current.contains(event.target)) {
       setShowProfileMenu(false);
@@ -25,32 +29,11 @@ useEffect(() => {
   document.addEventListener("mousedown", handleClickOutside);
   return () => document.removeEventListener("mousedown", handleClickOutside);
 }, []);
-  const stats = [
-    { label: "Total Plastic Diverted", value: "1,240 kg", icon: "🌱" },
-    { label: "Active User Growth", value: "+15%", icon: "📈" },
-    { label: "Total Rewards Claimed", value: "850", icon: "🎁" }
-  ];
 
   return (
     <div className="dashboard-container">
       {/* 1. SIDEBAR: Partner/Merchant & Management Links */}
-      <aside className="dashboard-sidebar">
-        <div className="logo-section">
-          <h2>EcoDrop Admin</h2>
-        </div>
-        <nav className="nav-menu">
-          <ul>
-            <li className="active">📊 Overview</li>
-            <li>📍 Bin Locator</li>
-            <li>📜 Deposit Logs</li>
-            <li>🤝 Partner Management</li>
-            <li>🎟️ Rewards & Vouchers</li>
-            <li>⚙️ Threshold Config</li>
-          </ul>
-        </nav>
-      </aside>
-
-      
+      <Sidebar activeTab="Overview" />
 
       {/* MAIN CONTENT AREA */}
       <main className="dashboard-main">
@@ -60,34 +43,14 @@ useEffect(() => {
           </div>
           
           <div className="header-controls">
-            {/* SETTINGS ICON & DROPDOWN */}
-            <div className="dropdown-wrapper" ref={settingsRef}>
-              <button 
-                className="icon-button" 
-                onClick={() => { 
-                  setShowSettingsMenu(!showSettingsMenu); 
-                  setShowProfileMenu(false); 
-                }}
-              >
-                ⚙️
-              </button>
-              {showSettingsMenu && (
-                <ul className="dropdown-menu">
-                  <li>Settings</li>
-                  <li>Help Center</li>
-                  <li className="menu-divider"></li>
-                  <li>System Health</li>
-                </ul>
-              )}
-            </div>
-
+            
             {/* PROFILE ICON & DROPDOWN */}
             <div className="dropdown-wrapper" ref={profileRef}>
               <div 
                 className="profile-trigger" 
                 onClick={() => { 
                   setShowProfileMenu(!showProfileMenu); 
-                  setShowSettingsMenu(false); 
+                 
                 }}
               >
                 <span>Admin</span>
@@ -95,11 +58,11 @@ useEffect(() => {
               </div>
               {showProfileMenu && (
                 <ul className="dropdown-menu floating">
-                  <li>Edit Profile</li>
-                  <li>Switch Account</li>
-                  <li>Activity Log</li>
+                 <li><button className="dropdown-item">Settings</button></li>
+                  <li><button className="dropdown-item">Help Center</button></li>
                   <li className="menu-divider"></li>
-                  <li className="logout-option" onClick={onLogout}>Logout</li>
+                  <li><button className="dropdown-item">System Health</button></li>
+                  <li><button className="dropdown-item" onClick={onLogout}>Logout</button></li>
                 </ul>
               )}
             </div>
@@ -111,13 +74,12 @@ useEffect(() => {
         {/* 4. SUSTAINABILITY ANALYTICS */}
         <section className="analytics-grid">
           {stats.map((stat, index) => (
-            <div key={index} className="stat-card">
-              <span className="stat-icon">{stat.icon}</span>
-              <div>
-                <p className="stat-label">{stat.label}</p>
-                <h3 className="stat-value">{stat.value}</h3>
-              </div>
-            </div>
+            <StatCard 
+              key={index} 
+              icon={stat.icon} 
+              label={stat.label} 
+              value={stat.value} 
+            />
           ))}
         </section>
 

@@ -21,10 +21,6 @@ function App() {
   }
 
   if (currentPage === 'dashboard') {
-    return <DashboardPage />;
-  }
-
-  if (currentPage === 'dashboard') {
     return <DashboardPage onLogout={handleLogout} />; 
   }
 
