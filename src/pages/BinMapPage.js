@@ -13,7 +13,7 @@ const BinMapPage = ({ onNavigate, onLogout }) => {
     status: 'Critical',
     fillLevel: 85,
     lastEmptied: '2026-02-01 08:00 AM',
-    nextCollection: '2026-02-15 10:00 AM',
+    nextCollection: '2026-02-15 08:00 AM',
     capacity: '20 kg',
     currentLoad: '17 kg',
     type: 'Polyethylene',

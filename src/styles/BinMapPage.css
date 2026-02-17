@@ -19,7 +19,6 @@
   overflow-y: auto;
 }
 
-/* HEADER */
 .binmap-header {
   display: flex;
   justify-content: space-between;
@@ -56,7 +55,6 @@
   margin-bottom: 20px;
 }
 
-/* CONTENT ROW: map + detail card side by side */
 .binmap-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -64,7 +62,6 @@
   align-items: start;
 }
 
-/* MAP */
 .map-wrapper {
   background: white;
   border-radius: 16px;
@@ -79,7 +76,6 @@
   display: block;
 }
 
-/* BIN DETAIL CARD */
 .bin-detail-card {
   background-color: var(--kombu-green);
   border-radius: 20px;
@@ -141,7 +137,6 @@
   line-height: 1.4;
 }
 
-/* FILL LEVEL BAR */
 .bin-fill-section {
   display: flex;
   flex-direction: column;

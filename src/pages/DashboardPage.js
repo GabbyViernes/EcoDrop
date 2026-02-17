@@ -56,7 +56,6 @@ const DashboardPage = ({ onLogout, onNavigate }) => {
           </div>
         </header>
 
-        {/* SUSTAINABILITY ANALYTICS */}
         <section className="analytics-grid">
           {stats.map((stat, index) => (
             <StatCard
@@ -68,7 +67,6 @@ const DashboardPage = ({ onLogout, onNavigate }) => {
           ))}
         </section>
 
-        {/* LIVE BIN MONITORING & MAP */}
         <section className="dashboard-middle-row">
           <div className="map-card">
             <h3>Bin Locator Map</h3>
@@ -98,7 +96,6 @@ const DashboardPage = ({ onLogout, onNavigate }) => {
           </div>
         </section>
 
-        {/* DEPOSIT TRANSACTION LOGS */}
         <section className="logs-section">
           <h3>Recent Deposit Transactions</h3>
           <table className="logs-table">
