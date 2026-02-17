@@ -14,19 +14,27 @@ function LandingPage({ onLogin, onAbout }) {
     setShowLoginForm(true);
   };
 
+  const handleCloseForm = () => {
+    setShowLoginForm(false);
+    setEmail('');
+    setPassword('');
+    setShowPassword(false);
+    setRememberMe(false);
+  };
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     onLogin();
   };
 
   return (
-    <div 
+    <div
       className="landing-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="landing-content">
         <img src={logoWord} alt="EcoDrop Logo" className="logo-word" />
-        
+
         {!showLoginForm ? (
           <div className="button-group">
             <button className="landing-btn" onClick={handleLoginClick}>
@@ -38,6 +46,15 @@ function LandingPage({ onLogin, onAbout }) {
           </div>
         ) : (
           <form className="login-form" onSubmit={handleLoginSubmit}>
+            <button
+              type="button"
+              className="close-btn"
+              onClick={handleCloseForm}
+              aria-label="Close login form"
+            >
+              X
+            </button>
+
             <div className="form-group">
               <input
                 type="email"
@@ -48,7 +65,7 @@ function LandingPage({ onLogin, onAbout }) {
                 className="form-input"
               />
             </div>
-            
+
             <div className="form-group password-group">
               <input
                 type={showPassword ? "text" : "password"}

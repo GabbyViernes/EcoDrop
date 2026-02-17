@@ -13,7 +13,7 @@
 .landing-content {
   text-align: center;
   z-index: 10;
-  padding: 0; 
+  padding: 0;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
 .logo-word {
   width: 800px;
   max-width: 90%;
-  margin-bottom: 0; 
+  margin-bottom: 0;
 }
 
 .button-group {
@@ -57,6 +57,7 @@
 }
 
 .login-form {
+  position: relative;
   width: 100%;
   max-width: 350px;
   display: flex;
@@ -66,6 +67,30 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #5d4a1f;
+  border: none;
+  font-size: 0.7rem;
+  color: #e5d7c4;
+  cursor: pointer;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: rgba(76, 61, 25, 0.1);
+  color: #4c3d19;
 }
 
 .form-group {

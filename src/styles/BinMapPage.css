@@ -1,0 +1,202 @@
+:root {
+  --cafe-noir: #4C3D19;
+  --kombu-green: #354024;
+  --moss-green: #889063;
+  --tan: #CFBB99;
+  --bone: #E5D7C4;
+}
+
+.binmap-container {
+  display: flex;
+  background-color: var(--bone);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.binmap-main {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* HEADER */
+.binmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.binmap-header .search-bar input {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--tan);
+  width: 320px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+
+.binmap-header .search-bar input:focus {
+  border-color: var(--cafe-noir);
+  box-shadow: 0 0 0 3px rgba(76, 61, 25, 0.1);
+}
+
+.binmap-title {
+  font-size: 1.4rem;
+  color: var(--kombu-green);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* CONTENT ROW: map + detail card side by side */
+.binmap-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* MAP */
+.map-wrapper {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--tan);
+}
+
+.binmap-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* BIN DETAIL CARD */
+.bin-detail-card {
+  background-color: var(--kombu-green);
+  border-radius: 20px;
+  padding: 24px;
+  color: var(--bone);
+  box-shadow: 0 6px 20px rgba(53, 64, 36, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bin-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bin-id {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+}
+
+.bin-status-badge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bin-status-badge.critical {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.bin-status-badge.normal {
+  background-color: var(--moss-green);
+  color: white;
+}
+
+.bin-status-badge.empty {
+  background-color: var(--tan);
+  color: var(--cafe-noir);
+}
+
+.bin-location-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--tan);
+  margin: 0;
+}
+
+.bin-address {
+  font-size: 0.85rem;
+  color: rgba(229, 215, 196, 0.7);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* FILL LEVEL BAR */
+.bin-fill-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bin-fill-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bone);
+}
+
+.bin-fill-percent {
+  font-weight: 700;
+}
+
+.bin-fill-bar-bg {
+  background-color: rgba(229, 215, 196, 0.2);
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.bin-fill-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease-out;
+}
+
+/* INFO GRID */
+.bin-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.bin-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bin-info-label {
+  font-size: 0.75rem;
+  color: rgba(229, 215, 196, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.bin-info-value {
+  font-size: 0.9rem;
+  color: var(--bone);
+  font-weight: 500;
+}
