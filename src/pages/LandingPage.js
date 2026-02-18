@@ -19,6 +19,10 @@ function LandingPage({ onLogin, onAbout }) {
     onLogin();
   };
 
+  const handleCloseForm = () => {
+    setShowLoginForm(false);
+  };
+
   return (
     <div 
       className="landing-page"
@@ -38,6 +42,14 @@ function LandingPage({ onLogin, onAbout }) {
           </div>
         ) : (
           <form className="login-form" onSubmit={handleLoginSubmit}>
+            <button
+              type="button"
+              className="close-form-btn"
+              onClick={handleCloseForm}
+              title="Close login form"
+            >
+              ×
+            </button>
             <div className="form-group">
               <input
                 type="email"

@@ -57,15 +57,16 @@
 }
 
 .login-form {
-  width: 100%;
-  max-width: 350px;
+  width: 200%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.8rem;
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
 .form-group {
@@ -75,7 +76,7 @@
 
 .form-input {
   width: 100%;
-  padding: 12px 15px;
+  padding: 16px 15px;
   font-size: 1rem;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -134,7 +135,7 @@
 }
 
 .login-submit-btn {
-  padding: 12px;
+  padding: 16px;
   font-size: 1.1rem;
   font-weight: 600;
   color: #e5d7c4;
@@ -149,4 +150,33 @@
 .login-submit-btn:hover {
   background-color: #5d4a1f;
   box-shadow: 0 4px 12px rgba(76, 61, 25, 0.4);
+}
+
+.close-form-btn {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #4c3d19;
+  cursor: pointer;
+  padding: 0 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-form-btn:hover {
+  background-color: rgba(76, 61, 25, 0.1);
+  color: #5d4a1f;
+  transform: scale(1.1);
+}
+
+.close-form-btn:active {
+  transform: scale(0.95);
 }

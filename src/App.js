@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/AboutPage';
-import DashboardPage from './pages/DashboardPage'; // New Import
+import DashboardPage from './pages/DashboardPage'; 
 
 function App() {
   const [currentPage, setCurrentPage] = useState('landing');

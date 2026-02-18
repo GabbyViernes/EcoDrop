@@ -18,8 +18,7 @@ const DashboardPage = ({onLogout}) => {
 
 useEffect(() => {
   const handleClickOutside = (event) => {
-    // Close settings if clicked outside
-
+    
     // Close profile if clicked outside
     if (profileRef.current && !profileRef.current.contains(event.target)) {
       setShowProfileMenu(false);
