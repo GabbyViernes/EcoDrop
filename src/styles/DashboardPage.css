@@ -13,12 +13,18 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Sidebar Styling */
 .dashboard-sidebar {
   width: 260px;
   background-color: var(--kombu-green);
   color: var(--bone);
   padding: 30px 20px;
+}
+
+.sidebar-logo-img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
 }
 
 .dashboard-header {
@@ -28,15 +34,13 @@
   padding: 20px 30px;
   background-color: white;
   
-  /* STICKY BEHAVIOR */
   position: sticky;
-  top: 0;       /* Keeps it at the top of the scroll view */
+  top: 0;       
   z-index: 100; 
 
-  /* NEW: Rounding and Spacing */
-  border-radius: 20px;      /* Rounds the bar corners */
-  margin-bottom: 40px;      /* Increases space between header and content below */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Softens the floating effect */
+  border-radius: 20px;      
+  margin-bottom: 40px;      
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
 }
 
 .header-controls {
@@ -46,14 +50,14 @@
   flex-shrink: 0; 
 }
 
-/* Parent container: MUST be relative so menu anchors to it */
+
 .dropdown-wrapper {
   position: relative; 
   display: flex;
   align-items: center;
 }
 
-/* ICON BUTTON RESET */
+
 .icon-button {
   background: none;
   border: none;
@@ -68,28 +72,26 @@
   background-color: var(--bone);
 }
 
-/* DROPDOWN MENU STYLING */
 .dropdown-menu {
   position: absolute; 
-  top: calc(100% + 15px); /* Moves it below the header */
-  right: 0;               /* Aligns to the right edge of the icon */
+  top: calc(100% + 15px); 
+  right: 0;               
   background: white;
-  min-width: 220px;       /* Slightly wider for button text */
+  min-width: 220px;       
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
   z-index: 9999;          
   list-style: none;
-  padding: 8px 0;         /* Padding for the list itself */
+  padding: 8px 0;         
   border: 1px solid var(--tan);
   white-space: nowrap; 
-  overflow: hidden;       /* Keeps rounded corners clean */
+  overflow: hidden;       
 }
 
-/* NEW: Button Styles for Dropdown Items */
 .dropdown-item {
-  width: 100%;            /* Fills the width of the li */
-  text-align: left;       /* Aligns text to start */
-  padding: 12px 20px;     /* Comfortable click area */
+  width: 100%;            
+  text-align: left;       
+  padding: 12px 20px;     
   background: none;
   border: none;
   font-size: 0.95rem;
@@ -106,18 +108,16 @@
   color: var(--cafe-noir);
 }
 
-/* Specific styling for Logout to make it stand out */
 .logout-item {
   color: #e74c3c;
   font-weight: 600;
 }
 
 .logout-item:hover {
-  background-color: #fceaea; /* Light red background */
+  background-color: #fceaea; 
   color: #c0392b;
 }
 
-/* Remove default li padding/margin since button handles it */
 .dropdown-menu li {
   margin: 0;
   padding: 0;
@@ -131,7 +131,6 @@
   opacity: 0.5;
 }
 
-/* PROFILE TRIGGER STYLING */
 .profile-trigger {
   display: flex;
   align-items: center;
@@ -155,7 +154,6 @@
   flex-shrink: 0; 
 }
 
-/* Sidebar Navigation */
 .nav-menu ul {
   list-style: none;
   padding: 0;
@@ -175,7 +173,6 @@
   color: white;
 }
 
-/* Main Content Layout */
 .dashboard-main {
   flex-grow: 1;
   padding: 30px;
@@ -196,7 +193,6 @@
   box-shadow: 0 0 0 3px rgba(76, 61, 25, 0.1);
 }
 
-/* Analytics Grid */
 .analytics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -227,7 +223,6 @@
 .stat-label { color: var(--moss-green); font-weight: 600; }
 .stat-value { color: var(--cafe-noir); margin: 0; }
 
-/* Map and Bin Layout */
 .dashboard-middle-row {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -255,7 +250,6 @@
   display: block;
 }
 
-/* Bin Status Items */
 .bin-list {
   display: flex;
   flex-direction: column;
@@ -276,7 +270,7 @@
   height: 8px;
   border-radius: 10px;
   flex-grow: 1;
-  overflow: hidden; /* Ensures bar stays inside rounded corners */
+  overflow: hidden; 
 }
 
 .progress-bar {
@@ -291,14 +285,13 @@
 .percent {
   font-weight: bold;
   font-size: 0.85rem;
-  width: 35px; /* Ensures alignment */
+  width: 35px; 
   text-align: right;
 }
 
-/* Table Styling */
 .logs-table {
   width: 100%;
-  border-collapse: separate; /* Allows border radius on rows */
+  border-collapse: separate; 
   border-spacing: 0;
   background: white;
   border-radius: 12px;

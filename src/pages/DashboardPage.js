@@ -2,12 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import StatCard from '../components/StatCard';
 import '../styles/DashboardPage.css';
-import BinMapImage from '../assets/images/BinMapImage.png'; 
+import BinMapImage from '../assets/images/BinMapImage.png';
 
-const DashboardPage = ({onLogout}) => {
+const DashboardPage = ({ onLogout, onNavigate }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
-  const settingsRef = useRef(null);
   const profileRef = useRef(null);
 
   const stats = [
@@ -16,48 +14,38 @@ const DashboardPage = ({onLogout}) => {
     { label: "Total Rewards Claimed", value: "850", icon: "🎁" }
   ];
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    
-    // Close profile if clicked outside
-    if (profileRef.current && !profileRef.current.contains(event.target)) {
-      setShowProfileMenu(false);
-    }
-  };
-
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="dashboard-container">
-      {/* 1. SIDEBAR: Partner/Merchant & Management Links */}
-      <Sidebar activeTab="Overview" />
+      <Sidebar activeTab="Overview" onNavigate={onNavigate} onLogout={onLogout} />
 
-      {/* MAIN CONTENT AREA */}
       <main className="dashboard-main">
         <header className="dashboard-header">
           <div className="search-bar">
             <input type="text" placeholder="Search transactions, user IDs, or bins..." />
           </div>
-          
+
           <div className="header-controls">
-            
-            {/* PROFILE ICON & DROPDOWN */}
             <div className="dropdown-wrapper" ref={profileRef}>
-              <div 
-                className="profile-trigger" 
-                onClick={() => { 
-                  setShowProfileMenu(!showProfileMenu); 
-                 
-                }}
+              <div
+                className="profile-trigger"
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
               >
                 <span>Admin</span>
                 <div className="profile-circle"></div>
               </div>
               {showProfileMenu && (
                 <ul className="dropdown-menu floating">
-                 <li><button className="dropdown-item">Settings</button></li>
+                  <li><button className="dropdown-item">Settings</button></li>
                   <li><button className="dropdown-item">Help Center</button></li>
                   <li className="menu-divider"></li>
                   <li><button className="dropdown-item">System Health</button></li>
@@ -68,21 +56,17 @@ useEffect(() => {
           </div>
         </header>
 
-
-        
-        {/* 4. SUSTAINABILITY ANALYTICS */}
         <section className="analytics-grid">
           {stats.map((stat, index) => (
-            <StatCard 
-              key={index} 
-              icon={stat.icon} 
-              label={stat.label} 
-              value={stat.value} 
+            <StatCard
+              key={index}
+              icon={stat.icon}
+              label={stat.label}
+              value={stat.value}
             />
           ))}
         </section>
 
-        {/* 2. LIVE BIN MONITORING & MAP */}
         <section className="dashboard-middle-row">
           <div className="map-card">
             <h3>Bin Locator Map</h3>
@@ -90,21 +74,21 @@ useEffect(() => {
               <img src={BinMapImage} alt="Bin Map" className="bin-map-image" />
             </div>
           </div>
-          
+
           <div className="bin-status-card">
             <h3>Live Bin Status</h3>
             <div className="bin-list">
               <div className="bin-item">
                 <span>BIN-001 (Limketkai)</span>
                 <div className="progress-container">
-                  <div className="progress-bar critical" style={{width: '85%'}}></div>
+                  <div className="progress-bar critical" style={{ width: '85%' }}></div>
                 </div>
                 <span className="percent">85%</span>
               </div>
               <div className="bin-item">
                 <span>BIN-002 (SM Downtown)</span>
                 <div className="progress-container">
-                  <div className="progress-bar normal" style={{width: '45%'}}></div>
+                  <div className="progress-bar normal" style={{ width: '45%' }}></div>
                 </div>
                 <span className="percent">45%</span>
               </div>
@@ -112,7 +96,6 @@ useEffect(() => {
           </div>
         </section>
 
-        {/* 3. DEPOSIT TRANSACTION LOGS (Preview) */}
         <section className="logs-section">
           <h3>Recent Deposit Transactions</h3>
           <table className="logs-table">
