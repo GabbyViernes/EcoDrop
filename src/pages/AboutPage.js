@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/AboutPage.css';
 import backgroundImage from '../assets/images/EcoDrop-AboutBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 
 function AboutPage({ onBack }) {
+  const contentGridRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const cards = document.querySelectorAll('.info-card, .about-logo, .about-hero, .cta-section');
+      
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        
+        if (isInView) {
+          card.classList.add('fade-in');
+        } else {
+          card.classList.remove('fade-in');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger on mount
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div 
       className="about-page"

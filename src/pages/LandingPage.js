@@ -48,13 +48,12 @@ function LandingPage({ onLogin, onAbout }) {
           <form className="login-form" onSubmit={handleLoginSubmit}>
             <button
               type="button"
-              className="close-btn"
+              className="close-form-btn"
               onClick={handleCloseForm}
-              aria-label="Close login form"
+              title="Close login form"
             >
-              X
+              ×
             </button>
-
             <div className="form-group">
               <input
                 type="email"
