@@ -1,0 +1,12 @@
+.depositlogs-container {
+  display: flex;
+  background-color: var(--bone);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.depositlogs-main {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+}

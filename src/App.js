@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/AboutPage';
 import DashboardPage from './pages/DashboardPage';
 import BinMapPage from './pages/BinMapPage';
+import DepositLogsPage from './pages/DepositLogsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('landing');
@@ -14,6 +15,7 @@ function App() {
   const handleLogout = () => setCurrentPage('landing');
 
   const handleNavigate = (tabName) => {
+    if (tabName === 'Deposit Logs') setCurrentPage('depositlogs');
     if (tabName === 'Bin Locator') setCurrentPage('binmap');
     if (tabName === 'Overview') setCurrentPage('dashboard');
 
@@ -33,6 +35,10 @@ function App() {
 
   if (currentPage === 'binmap') {
     return <BinMapPage onLogout={handleLogout} onNavigate={handleNavigate} />;
+  }
+
+  if (currentPage === 'depositlogs') {
+    return <DepositLogsPage onLogout={handleLogout} onNavigate={handleNavigate} />;
   }
 
   return null;
