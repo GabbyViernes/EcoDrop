@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/AboutPage';
@@ -7,41 +8,18 @@ import BinMapPage from './pages/BinMapPage';
 import DepositLogsPage from './pages/DepositLogsPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('landing');
-
-  const handleLogin = () => setCurrentPage('dashboard');
-  const handleAbout = () => setCurrentPage('about');
-  const handleBackToLanding = () => setCurrentPage('landing');
-  const handleLogout = () => setCurrentPage('landing');
-
-  const handleNavigate = (tabName) => {
-    if (tabName === 'Deposit Logs') setCurrentPage('depositlogs');
-    if (tabName === 'Bin Locator') setCurrentPage('binmap');
-    if (tabName === 'Overview') setCurrentPage('dashboard');
-
-  };
-
-  if (currentPage === 'landing') {
-    return <LandingPage onLogin={handleLogin} onAbout={handleAbout} />;
-  }
-
-  if (currentPage === 'about') {
-    return <AboutPage onBack={handleBackToLanding} />;
-  }
-
-  if (currentPage === 'dashboard') {
-    return <DashboardPage onLogout={handleLogout} onNavigate={handleNavigate} />;
-  }
-
-  if (currentPage === 'binmap') {
-    return <BinMapPage onLogout={handleLogout} onNavigate={handleNavigate} />;
-  }
-
-  if (currentPage === 'depositlogs') {
-    return <DepositLogsPage onLogout={handleLogout} onNavigate={handleNavigate} />;
-  }
-
-  return null;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/binmap" element={<BinMapPage />} />
+        <Route path="/depositlogs" element={<DepositLogsPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

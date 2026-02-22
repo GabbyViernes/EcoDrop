@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../styles/LandingPage.css';
 import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 
-function LandingPage({ onLogin, onAbout }) {
+function LandingPage() {
+  const navigate = useNavigate(); 
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLoginClick = () => {
-    setShowLoginForm(true);
-  };
+  const handleLoginClick = () => setShowLoginForm(true);
 
   const handleCloseForm = () => {
     setShowLoginForm(false);
@@ -24,7 +24,7 @@ function LandingPage({ onLogin, onAbout }) {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    onLogin();
+    navigate('/dashboard'); 
   };
 
   return (
@@ -40,7 +40,7 @@ function LandingPage({ onLogin, onAbout }) {
             <button className="landing-btn" onClick={handleLoginClick}>
               Log In
             </button>
-            <button className="landing-btn" onClick={onAbout}>
+            <button className="landing-btn" onClick={() => navigate('/about')}>
               About
             </button>
           </div>

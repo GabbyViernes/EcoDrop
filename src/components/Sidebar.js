@@ -1,14 +1,18 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import EcoDropLogoWord from '../assets/images/EcoDropLogoWord.png';
 
-const Sidebar = ({ activeTab, onNavigate, onLogout }) => {
+const Sidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const menuItems = [
-    { name: "Overview", icon: "📊" },
-    { name: "Bin Locator", icon: "📍" },
-    { name: "Deposit Logs", icon: "📜" },
-    { name: "Partner Management", icon: "🤝" },
-    { name: "Rewards & Vouchers", icon: "🎟️" },
-    { name: "Threshold Config", icon: "⚙️" }
+    { name: "Overview", icon: "📊", path: "/dashboard" },
+    { name: "Bin Locator", icon: "📍", path: "/binmap" },
+    { name: "Deposit Logs", icon: "📜", path: "/depositlogs" },
+    { name: "Partner Management", icon: "🤝", path: "/partners" },
+    { name: "Rewards & Vouchers", icon: "🎟️", path: "/rewards" },
+    { name: "Threshold Config", icon: "⚙️", path: "/threshold" }
   ];
 
   return (
@@ -21,8 +25,9 @@ const Sidebar = ({ activeTab, onNavigate, onLogout }) => {
           {menuItems.map((item) => (
             <li
               key={item.name}
-              className={activeTab === item.name ? "active" : ""}
-              onClick={() => onNavigate && onNavigate(item.name)}
+              className={location.pathname === item.path ? "active" : ""}
+              onClick={() => navigate(item.path)}
+              style={{ cursor: 'pointer' }}
             >
               {item.icon} {item.name}
             </li>
