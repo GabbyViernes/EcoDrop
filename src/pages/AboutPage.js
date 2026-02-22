@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 import '../styles/AboutPage.css';
 import backgroundImage from '../assets/images/EcoDrop-AboutBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 
-function AboutPage({ onBack }) {
+// 2. Remove the { onBack } prop
+function AboutPage() {
   const contentGridRef = useRef(null);
+  const navigate = useNavigate(); // 3. Initialize the navigate hook
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +36,8 @@ function AboutPage({ onBack }) {
       className="about-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <button className="back-btn" onClick={onBack}>
+      {/* 4. Update onClick to use navigate('/') to go back to landing page */}
+      <button className="back-btn" onClick={() => navigate('/')}>
         ←
       </button>
 
@@ -131,7 +135,8 @@ function AboutPage({ onBack }) {
         <div className="cta-section">
           <h2>Join the Movement</h2>
           <p>Be part of the solution. Start recycling your e-commerce packaging today!</p>
-          <button className="cta-button" onClick={onBack}>
+          {/* 5. Update the CTA button as well */}
+          <button className="cta-button" onClick={() => navigate('/')}>
             Get Started
           </button>
         </div>
