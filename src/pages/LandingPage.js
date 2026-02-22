@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import '../styles/LandingPage.css';
 import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 
 function LandingPage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLoginClick = () => setShowLoginForm(true);
+  const handleLoginClick = function () {
+    setShowLoginForm(true);
+  };
 
-  const handleCloseForm = () => {
+  const handleCloseForm = function () {
     setShowLoginForm(false);
     setEmail('');
     setPassword('');
@@ -22,10 +24,13 @@ function LandingPage() {
     setRememberMe(false);
   };
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    navigate('/dashboard'); 
-  };
+const handleLoginSubmit = function (e) {
+  e.preventDefault();
+
+  localStorage.setItem('ecodropLoggedIn', 'true');
+
+  navigate('/dashboard', { replace: true });
+};
 
   return (
     <div
@@ -40,7 +45,10 @@ function LandingPage() {
             <button className="landing-btn" onClick={handleLoginClick}>
               Log In
             </button>
-            <button className="landing-btn" onClick={() => navigate('/about')}>
+            <button
+              className="landing-btn secondary"
+              onClick={function () { navigate('/about'); }}
+            >
               About
             </button>
           </div>
@@ -54,12 +62,17 @@ function LandingPage() {
             >
               ×
             </button>
+
+            <p className="form-subtitle solo">
+              Log in to continue your EcoDrop journey
+            </p>
+
             <div className="form-group">
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={function (e) { setEmail(e.target.value); }}
                 required
                 className="form-input"
               />
@@ -67,19 +80,19 @@ function LandingPage() {
 
             <div className="form-group password-group">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={function (e) { setPassword(e.target.value); }}
                 required
                 className="form-input"
               />
               <button
                 type="button"
                 className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={function () { setShowPassword(!showPassword); }}
               >
-                {showPassword ? "👁️" : "👁️‍🗨️"}
+                {showPassword ? '👁️' : '👁️‍🗨️'}
               </button>
             </div>
 
@@ -88,16 +101,30 @@ function LandingPage() {
                 <input
                   type="checkbox"
                   checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
+                  onChange={function (e) { setRememberMe(e.target.checked); }}
                 />
                 <span>Remember Me</span>
               </label>
-              <a href="#forgot" className="forgot-password">Forgot Password?</a>
+
+              <a href="#forgot" className="forgot-password">
+                Forgot Password?
+              </a>
             </div>
 
             <button type="submit" className="login-submit-btn">
               Log In
             </button>
+
+            <div className="switch-auth-row">
+              <span>Don&apos;t have an account?</span>
+              <button
+                type="button"
+                className="switch-auth-btn"
+                onClick={function () { navigate('/signup'); }}
+              >
+                Sign up
+              </button>
+            </div>
           </form>
         )}
       </div>
