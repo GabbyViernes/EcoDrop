@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Sidebar from '../components/Sidebar';
+import Navbar from '../components/NavigationBar';
 import BinMapImage from '../assets/images/BinMapImage.png';
 import '../styles/BinMapPage.css';
 
-const BinMapPage = ({ onNavigate, onLogout }) => {
+const BinMapPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const binDetails = {
@@ -20,11 +20,16 @@ const BinMapPage = ({ onNavigate, onLogout }) => {
     coordinates: '8.4822° N, 124.6472° E',
   };
 
-  const fillColor = binDetails.fillLevel >= 80 ? '#e74c3c' : binDetails.fillLevel >= 50 ? '#f39c12' : '#889063';
+  const fillColor =
+    binDetails.fillLevel >= 80
+      ? '#e74c3c'
+      : binDetails.fillLevel >= 50
+      ? '#f39c12'
+      : '#889063';
 
   return (
-    <div className="binmap-container">
-      <Sidebar activeTab="Bin Locator" onNavigate={onNavigate} onLogout={onLogout} />
+    <div className="binmap-page-shell">
+      <Navbar />
 
       <main className="binmap-main">
         <header className="binmap-header">

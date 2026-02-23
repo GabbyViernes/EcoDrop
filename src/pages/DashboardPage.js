@@ -1,19 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatCard from '../components/StatCard';
+import NavigationBar from '../components/NavigationBar';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png';
-import logoWord from '../assets/images/EcoDropLogoWord.png';
 
-function DashboardPage(props) {
-  var onLogout = props.onLogout;
+function DashboardPage() {
   var navigate = useNavigate();
-
-  var _useState = useState(false);
-  var showProfileMenu = _useState[0];
-  var setShowProfileMenu = _useState[1];
-
-  var profileRef = useRef(null);
 
   var stats = [
     { label: 'Total Plastic Diverted', value: '1,240 kg', icon: '🌱' },
@@ -21,137 +14,13 @@ function DashboardPage(props) {
     { label: 'Total Rewards Claimed', value: '850', icon: '🎁' }
   ];
 
-  useEffect(function () {
-    function handleClickOutside(event) {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        setShowProfileMenu(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return function () {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [setShowProfileMenu]); // ✅ ESLint warning fixed
-
-  function handleLogoutClick() {
-  localStorage.removeItem('ecodropLoggedIn');
-
-  if (onLogout) {
-    onLogout();
-    return;
-  }
-
-  navigate('/', { replace: true }); // go to homepage public version
-}
-
   return (
     <div className="dashboard-page-shell">
       <div className="hill h1"></div>
       <div className="hill h2"></div>
       <div className="hill h3"></div>
 
-      <header className="dashboard-topbar">
-        <div
-          className="brand-logo"
-          onClick={function () {
-            navigate('/');
-          }}
-        >
-          <img src={logoWord} alt="EcoDrop" className="brand-logo-img" />
-        </div>
-
-        <nav className="dashboard-nav">
-          <button
-            type="button"
-            onClick={function () {
-              navigate('/');
-            }}
-          >
-            Home
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              navigate('/about');
-            }}
-          >
-            About
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              navigate('/binmap');
-            }}
-          >
-            Bin Locator
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              alert('Help page is not available yet.');
-            }}
-          >
-            Help
-          </button>
-
-          <button type="button" className="active">
-            Dashboard
-          </button>
-        </nav>
-
-        <div className="header-controls">
-          <div className="search-bar">
-            <input type="text" placeholder="Search transactions, users, bins..." />
-          </div>
-
-          <div className="dropdown-wrapper" ref={profileRef}>
-            <div
-              className="profile-trigger"
-              onClick={function () {
-                setShowProfileMenu(!showProfileMenu);
-              }}
-            >
-              <span>Admin</span>
-              <div className="profile-circle"></div>
-            </div>
-
-            {showProfileMenu && (
-              <ul className="dropdown-menu">
-                <li>
-                  <button className="dropdown-item" type="button">
-                    Settings
-                  </button>
-                </li>
-                <li>
-                  <button className="dropdown-item" type="button">
-                    Help Center
-                  </button>
-                </li>
-                <li className="menu-divider"></li>
-                <li>
-                  <button className="dropdown-item" type="button">
-                    System Health
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item logout-item"
-                    type="button"
-                    onClick={handleLogoutClick}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            )}
-          </div>
-        </div>
-      </header>
+      <NavigationBar />
 
       <main className="dashboard-content">
         <section className="dashboard-title-card">

@@ -6,15 +6,13 @@
   --bone: #E5D7C4;
 }
 
-.binmap-container {
-  display: flex;
-  background-color: var(--bone);
+.binmap-page-shell {
   min-height: 100vh;
+  background-color: var(--bone);
   font-family: 'Inter', sans-serif;
 }
 
 .binmap-main {
-  flex-grow: 1;
   padding: 30px;
   overflow-y: auto;
 }
@@ -168,7 +166,6 @@
   transition: width 0.5s ease-out;
 }
 
-/* INFO GRID */
 .bin-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -194,4 +191,14 @@
   font-size: 0.9rem;
   color: var(--bone);
   font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .binmap-content {
+    grid-template-columns: 1fr;
+  }
+
+  .binmap-header .search-bar input {
+    width: 100%;
+  }
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
+import NavigationBar from '../components/NavigationBar';
 import '../styles/DepositLogsPage.css';
 
-const DepositLogsPage = ({ onLogout, onNavigate }) => {
+const DepositLogsPage = () => {
   return (
-    <div className="depositlogs-container">
-      <Sidebar activeTab="Deposit Logs" onNavigate={onNavigate} onLogout={onLogout} />
+    <div className="depositlogs-page-shell">
+      <NavigationBar />
 
       <main className="depositlogs-main">
-        {/* ... */}
+        {/* Deposit Logs content goes here */}
       </main>
     </div>
   );

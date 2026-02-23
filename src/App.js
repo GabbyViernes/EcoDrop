@@ -18,25 +18,19 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/binmap" element={<BinMapPage />} />
 
+        {/* Protected routes */}
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
               <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/binmap"
-          element={
-            <ProtectedRoute>
-              <BinMapPage />
             </ProtectedRoute>
           }
         />
