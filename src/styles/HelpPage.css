@@ -1,0 +1,72 @@
+.help-page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #1e1e1e; /* dark background */
+  color: #f5f5f5;
+}
+
+.help-main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #2a2a2a; /* dark card background */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.help-main h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #4caf50; /* EcoDrop green accent */
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 10px;
+}
+
+.help-main p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.faq-section, .contact-section {
+  margin-top: 40px;
+}
+
+.faq-section h3, .contact-section h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #4caf50; /* green accent for section titles */
+}
+
+.faq-section ul, .contact-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.faq-section li {
+  margin-bottom: 20px;
+  background: #333;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.faq-section strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.faq-section p {
+  color: #ccc;
+}
+
+.contact-section ul li {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #ccc;
+}

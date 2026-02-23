@@ -10,14 +10,14 @@ function NavigationBar() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileRef = useRef(null);
 
-  useEffect(function () {
+  useEffect(() => {
     function handleClickOutside(event) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setShowProfileMenu(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return function () {
+    return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
@@ -38,16 +38,32 @@ function NavigationBar() {
       </div>
 
       <nav className="dashboard-nav">
-        <button type="button" className={isActive('/dashboard')} onClick={() => navigate('/dashboard')}>
+        <button
+          type="button"
+          className={isActive('/dashboard')}
+          onClick={() => navigate('/dashboard')}
+        >
           Dashboard
         </button>
-        <button type="button" className={isActive('/binmap')} onClick={() => navigate('/binmap')}>
+        <button
+          type="button"
+          className={isActive('/binmap')}
+          onClick={() => navigate('/binmap')}
+        >
           Bin Locator
         </button>
-        <button type="button" className={isActive('/depositlogs')} onClick={() => navigate('/depositlogs')}>
+        <button
+          type="button"
+          className={isActive('/depositlogs')}
+          onClick={() => navigate('/depositlogs')}
+        >
           Deposit Logs
         </button>
-        <button type="button" onClick={() => alert('Help page is not available yet.')}>
+        <button
+          type="button"
+          className={isActive('/help')}
+          onClick={() => navigate('/help')}
+        >
           Help
         </button>
       </nav>
@@ -69,18 +85,30 @@ function NavigationBar() {
           {showProfileMenu && (
             <ul className="dropdown-menu">
               <li>
-                <button className="dropdown-item" type="button">
+                <button
+                  className="dropdown-item"
+                  type="button"
+                  onClick={() => navigate('/settings')}
+                >
                   Settings
                 </button>
               </li>
               <li>
-                <button className="dropdown-item" type="button">
+                <button
+                  className="dropdown-item"
+                  type="button"
+                  onClick={() => navigate('/help')}
+                >
                   Help Center
                 </button>
               </li>
               <li className="menu-divider"></li>
               <li>
-                <button className="dropdown-item" type="button">
+                <button
+                  className="dropdown-item"
+                  type="button"
+                  onClick={() => navigate('/system-health')}
+                >
                   System Health
                 </button>
               </li>

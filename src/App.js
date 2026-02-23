@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import BinMapPage from './pages/BinMapPage';
 import DepositLogsPage from './pages/DepositLogsPage';
 import SignupPage from './pages/SignupPage';
+import HelpPage from './pages/HelpPage'; // ✅ Import HelpPage
 
 function ProtectedRoute(props) {
   const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/binmap" element={<BinMapPage />} />
+        <Route path="/help" element={<HelpPage />} /> {/* ✅ Add Help route */}
 
         {/* Protected routes */}
         <Route
@@ -44,6 +46,7 @@ function App() {
           }
         />
 
+        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
