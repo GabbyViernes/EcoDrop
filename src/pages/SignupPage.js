@@ -52,7 +52,7 @@ function SignupPage() {
             type="button"
             onClick={function () { navigate('/landing'); }}
           >
-            Log In
+            Sign In
           </button>
         </div>
       </div>
@@ -76,8 +76,8 @@ function SignupPage() {
 
         <div className="signup-right">
           <form className="signup-form-card" onSubmit={handleSignupSubmit}>
-            <h2>Sign up</h2>
-            <p className="signup-form-subtitle">Create your account to get started</p>
+            <h2>Sign Up</h2>
+            <p className="signup-form-subtitle">Create your account to get started.</p>
 
             <div className="signup-form-group">
               <input
@@ -148,7 +148,7 @@ function SignupPage() {
                 className="signup-switch-btn"
                 onClick={function () { navigate('/landing'); }}
               >
-                Log in
+                Sign In
               </button>
             </div>
           </form>

@@ -43,13 +43,13 @@ const handleLoginSubmit = function (e) {
         {!showLoginForm ? (
           <div className="button-group">
             <button className="landing-btn" onClick={handleLoginClick}>
-              Log In
+              Sign In
             </button>
             <button
               className="landing-btn secondary"
-              onClick={function () { navigate('/about'); }}
+              onClick={function () { navigate('/signup'); }}
             >
-              About
+              Sign Up
             </button>
           </div>
         ) : (
@@ -64,7 +64,7 @@ const handleLoginSubmit = function (e) {
             </button>
 
             <p className="form-subtitle solo">
-              Log in to continue your EcoDrop journey
+              Log in to continue your EcoDrop journey.
             </p>
 
             <div className="form-group">
@@ -112,7 +112,7 @@ const handleLoginSubmit = function (e) {
             </div>
 
             <button type="submit" className="login-submit-btn">
-              Log In
+              Sign In
             </button>
 
             <div className="switch-auth-row">

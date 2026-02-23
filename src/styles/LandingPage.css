@@ -38,7 +38,7 @@
 }
 
 .logo-word {
-  width: min(420px, 88vw);
+  width: min(600px, 88vw);
   max-width: 100%;
   height: auto;
   display: block;

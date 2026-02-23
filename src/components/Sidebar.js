@@ -28,8 +28,8 @@ function Navbar() {
         <button type="button" className={isActive('/about')} onClick={() => navigate('/about')}>
           About
         </button>
-        <button type="button" className={isActive('/binmap')} onClick={() => navigate('/binmap')}>
-          Bin Locator
+        <button type="button" onClick={() => alert('Analytics is not available yet.')}>
+          Analytics
         </button>
         <button type="button" onClick={() => alert('Help page is not available yet.')}>
           Help
