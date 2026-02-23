@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Homepage.css';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
+import Navbar from '../components/Sidebar';
 
 function HomePage() {
   var navigate = useNavigate();
@@ -22,92 +23,7 @@ function HomePage() {
         <img src={ecodrophomebg} alt="EcoDrop background" className="home-bg-image" />
       </div>
 
-      <header className="home-topbar">
-        <div
-          className="home-brand-logo"
-          onClick={function () {
-            navigate('/', { replace: isLoggedIn });
-          }}
-        >
-          <img src={logoWord} alt="EcoDrop" className="home-brand-logo-img" />
-        </div>
-
-        <nav className="home-nav">
-          <button
-            type="button"
-            className="active"
-            onClick={function () {
-              navigate('/', { replace: isLoggedIn });
-            }}
-          >
-            Home
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              navigate('/about', { replace: isLoggedIn });
-            }}
-          >
-            About
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              navigate('/binmap', { replace: isLoggedIn });
-            }}
-          >
-            Bin Locator
-          </button>
-
-          <button
-            type="button"
-            onClick={function () {
-              alert('Help page is not available yet.');
-            }}
-          >
-            Help
-          </button>
-
-          {isLoggedIn ? (
-            <button
-              type="button"
-              onClick={function () {
-                navigate('/dashboard', { replace: true });
-              }}
-            >
-              Dashboard
-            </button>
-          ) : null}
-        </nav>
-
-        <div className="home-auth">
-          {!isLoggedIn ? (
-            <>
-              <button
-                type="button"
-                className="btn btn-outline"
-                onClick={function () {
-                  navigate('/landing');
-                }}
-              >
-                Log in
-              </button>
-
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={function () {
-                  navigate('/landing');
-                }}
-              >
-                Sign up
-              </button>
-            </>
-          ) : null}
-        </div>
-      </header>
+      <Navbar />
 
       <main className="home-hero">
         <section className="hero-left">
@@ -148,13 +64,13 @@ function HomePage() {
         </section>
 
         <aside className="hero-glass-card">
-          <h3>Continue your eco journey</h3>
+          <h3>CONTINUE YOUR ECO JOURNEY!</h3>
           <p>Quick overview of nearby disposal options and your latest activity.</p>
 
           <div className="mini-panel">
             <div className="mini-row">
               <div>
-                <strong>Plastic Bottles</strong>
+                <strong>Plastic Mailers</strong>
                 <small>Nearest point: 0.8 km</small>
               </div>
               <span className="mini-tag">Open</span>
@@ -162,7 +78,7 @@ function HomePage() {
 
             <div className="mini-row">
               <div>
-                <strong>Paper & Cardboard</strong>
+                <strong>Bubble Wraps</strong>
                 <small>Nearest point: 1.1 km</small>
               </div>
               <span className="mini-tag">Open</span>
@@ -170,8 +86,8 @@ function HomePage() {
 
             <div className="mini-row">
               <div>
-                <strong>E-waste</strong>
-                <small>Drop-off: Saturday</small>
+                <strong>EcoBins</strong>
+                <small>eCollection: Saturday | 8:00 AM</small>
               </div>
               <span className="mini-tag">Schedule</span>
             </div>
@@ -194,7 +110,7 @@ function HomePage() {
         </aside>
       </main>
 
-      <div className="home-footer-note">EcoDrop • Clean habits, cleaner planet</div>
+      <div className="home-footer-note">© 2026 EcoDrop | Designed & Developed with ♻ for a greener future. All rights reserved.</div>
     </div>
   );
 }

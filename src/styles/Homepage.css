@@ -6,6 +6,7 @@
   --bone: #E5D7C4;
 }
 
+/* ─── PAGE SHELL ─────────────────────────────────────────────── */
 .home-page-shell {
   min-height: 100vh;
   position: relative;
@@ -15,6 +16,7 @@
   background: linear-gradient(180deg, #c9f5ea 0%, #f7ffd7 60%, #cbf0a6 100%);
 }
 
+/* ─── BACKGROUND IMAGE ───────────────────────────────────────── */
 .home-bg-layer {
   position: absolute;
   inset: 0;
@@ -30,6 +32,7 @@
   opacity: 1;
 }
 
+/* ─── TOPBAR / NAVBAR ────────────────────────────────────────── */
 .home-topbar {
   position: relative;
   z-index: 5;
@@ -54,7 +57,7 @@
 }
 
 .home-brand-logo-img {
-  width: 170px;
+  width: 50px;
   height: auto;
   object-fit: contain;
   display: block;
@@ -123,6 +126,7 @@
   gap: 10px;
 }
 
+/* ─── BUTTONS ────────────────────────────────────────────────── */
 .btn {
   border: none;
   border-radius: 12px;
@@ -164,6 +168,7 @@
   border-radius: 14px;
 }
 
+/* ─── HERO SECTION ───────────────────────────────────────────── */
 .home-hero {
   position: relative;
   z-index: 2;
@@ -186,7 +191,7 @@
 }
 
 .hero-logo-img {
-  width: clamp(240px, 34vw, 430px);
+  width: clamp(600px, 34vw, 430px);
   max-width: 100%;
   height: auto;
   display: block;
@@ -231,6 +236,7 @@
   font-weight: 700;
 }
 
+/* ─── GLASS CARD ─────────────────────────────────────────────── */
 .hero-glass-card {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.68);
@@ -255,6 +261,7 @@
   font-size: 0.92rem;
 }
 
+/* ─── MINI PANEL ─────────────────────────────────────────────── */
 .mini-panel {
   display: grid;
   gap: 10px;
@@ -292,6 +299,7 @@
   white-space: nowrap;
 }
 
+/* ─── MINI STATS ─────────────────────────────────────────────── */
 .mini-stats {
   margin-top: 14px;
   display: grid;
@@ -318,6 +326,7 @@
   color: #567054;
 }
 
+/* ─── FOOTER NOTE ────────────────────────────────────────────── */
 .home-footer-note {
   position: relative;
   z-index: 2;
@@ -327,6 +336,7 @@
   padding: 6px 16px 16px;
 }
 
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .home-topbar {
     grid-template-columns: 1fr;

@@ -1,22 +1,20 @@
-import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/AboutPage.css';
 import backgroundImage from '../assets/images/EcoDrop-AboutBG.png';
-import logoWord from '../assets/images/EcoDropLogoWord.png';
+import Navbar from '../components/Sidebar';
 
-// 2. Remove the { onBack } prop
 function AboutPage() {
-  const contentGridRef = useRef(null);
-  const navigate = useNavigate(); // 3. Initialize the navigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       const cards = document.querySelectorAll('.info-card, .about-logo, .about-hero, .cta-section');
-      
+
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-        
+
         if (isInView) {
           card.classList.add('fade-in');
         } else {
@@ -26,24 +24,19 @@ function AboutPage() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger on mount
-    
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div 
+    <div
       className="about-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      {/* 4. Update onClick to use navigate('/') to go back to landing page */}
-      <button className="back-btn" onClick={() => navigate('/')}>
-        ←
-      </button>
+      <Navbar />
 
       <div className="about-container">
-        <img src={logoWord} alt="EcoDrop Logo" className="about-logo" />
-        
         <div className="about-hero">
           <h1 className="about-title">About EcoDrop</h1>
           <p className="about-tagline">
@@ -56,9 +49,9 @@ function AboutPage() {
             <div className="card-icon">🌍</div>
             <h2>The Problem</h2>
             <p>
-              Plastic mailers and bubble wrap from e-commerce deliveries are often 
-              non-recyclable via standard bins and end up in Philippine landfills. 
-              There is no incentivized system for consumers to return this specific 
+              Plastic mailers and bubble wrap from e-commerce deliveries are often
+              non-recyclable via standard bins and end up in Philippine landfills.
+              There is no incentivized system for consumers to return this specific
               type of plastic waste.
             </p>
           </div>
@@ -67,8 +60,8 @@ function AboutPage() {
             <div className="card-icon">💡</div>
             <h2>Our Solution</h2>
             <p>
-              EcoDrop provides smart drop boxes equipped with IoT technology to verify 
-              deposits and reward users for returning e-commerce packaging waste. 
+              EcoDrop provides smart drop boxes equipped with IoT technology to verify
+              deposits and reward users for returning e-commerce packaging waste.
               Earn points for every plastic you recycle!
             </p>
           </div>
@@ -77,7 +70,7 @@ function AboutPage() {
             <div className="card-icon">👥</div>
             <h2>Who We Serve</h2>
             <ul>
-              <li><strong>E-commerce Shoppers</strong>, earn rewards for recycling. <strong> Recycling Partners</strong>, monitor and manage drop-off locations. <strong>Partner Merchant Stores</strong>, support sustainability initiatives.</li>
+              <li><strong>E-commerce Shoppers</strong>, earn rewards for recycling. <strong>Recycling Partners</strong>, monitor and manage drop-off locations. <strong>Partner Merchant Stores</strong>, support sustainability initiatives.</li>
             </ul>
           </div>
 
@@ -135,7 +128,6 @@ function AboutPage() {
         <div className="cta-section">
           <h2>Join the Movement</h2>
           <p>Be part of the solution. Start recycling your e-commerce packaging today!</p>
-          {/* 5. Update the CTA button as well */}
           <button className="cta-button" onClick={() => navigate('/')}>
             Get Started
           </button>
