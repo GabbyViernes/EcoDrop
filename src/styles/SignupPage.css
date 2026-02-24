@@ -27,7 +27,6 @@
   align-items: center;
 }
 
-/* ✅ IMPORTANT: use a unique class, not .logo-word */
 .signup-topbar-logo {
   width: 160px;
   max-width: 42vw;
@@ -224,7 +223,6 @@
   font-family: inherit;
 }
 
-/* Tablets / mobile */
 @media (max-width: 980px) {
   .signup-layout {
     grid-template-columns: 1fr;

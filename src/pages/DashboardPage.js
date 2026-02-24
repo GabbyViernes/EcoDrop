@@ -28,7 +28,7 @@ function DashboardPage() {
             <h1>EcoDrop Admin Dashboard</h1>
             <p>Monitor bin activity, recycling progress, and recent deposit transactions.</p>
           </div>
-          <button className="add-bin-btn" type="button">+ Add Bin</button>
+          <button className="add-bin-btn" type="button">+ Add EcoBin</button>
         </section>
 
         <section className="analytics-grid">

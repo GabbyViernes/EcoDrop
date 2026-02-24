@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Homepage.css';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
-import Navbar from '../components/Sidebar';
 
 function HomePage() {
-  var navigate = useNavigate();
-  var isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
   function handlePrimaryCTA() {
     if (isLoggedIn) {
@@ -17,13 +21,19 @@ function HomePage() {
     navigate('/landing');
   }
 
+  function handleLoginSubmit(e) {
+    e.preventDefault();
+    const username = email.split('@')[0];
+    localStorage.setItem('ecodropLoggedIn', 'true');
+    localStorage.setItem('ecodropUser', username);
+    navigate('/dashboard', { replace: true });
+  }
+
   return (
     <div className="home-page-shell">
       <div className="home-bg-layer">
         <img src={ecodrophomebg} alt="EcoDrop background" className="home-bg-image" />
       </div>
-
-      <Navbar />
 
       <main className="home-hero">
         <section className="hero-left">
@@ -48,9 +58,7 @@ function HomePage() {
             <button
               type="button"
               className="btn btn-soft btn-lg"
-              onClick={function () {
-                navigate('/binmap', { replace: isLoggedIn });
-              }}
+              onClick={() => navigate('/binmap', { replace: isLoggedIn })}
             >
               Find Bin Near Me
             </button>
@@ -64,53 +72,72 @@ function HomePage() {
         </section>
 
         <aside className="hero-glass-card">
-          <h3>CONTINUE YOUR ECO JOURNEY!</h3>
-          <p>Quick overview of nearby disposal options and your latest activity.</p>
+          <h3>LOGIN TO CONTINUE</h3>
 
-          <div className="mini-panel">
-            <div className="mini-row">
-              <div>
-                <strong>Plastic Mailers</strong>
-                <small>Nearest point: 0.8 km</small>
-              </div>
-              <span className="mini-tag">Open</span>
-            </div>
-
-            <div className="mini-row">
-              <div>
-                <strong>Bubble Wraps</strong>
-                <small>Nearest point: 1.1 km</small>
-              </div>
-              <span className="mini-tag">Open</span>
+          <form className="home-login-form" onSubmit={handleLoginSubmit}>
+            <div className="home-form-group">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="home-form-input"
+              />
             </div>
 
-            <div className="mini-row">
-              <div>
-                <strong>EcoBins</strong>
-                <small>eCollection: Saturday | 8:00 AM</small>
-              </div>
-              <span className="mini-tag">Schedule</span>
+            <div className="home-form-group home-password-group">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="home-form-input"
+              />
+              <button
+                type="button"
+                className="home-toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'}
+              </button>
             </div>
-          </div>
 
-          <div className="mini-stats">
-            <div className="mini-stat">
-              <div className="num">24</div>
-              <div className="lbl">Items Recycled</div>
+            <div className="home-form-options">
+              <label className="home-remember-me">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span>Remember Me</span>
+              </label>
+              <a href="#forgot" className="home-forgot-password">
+                Forgot Password?
+              </a>
             </div>
-            <div className="mini-stat">
-              <div className="num">6</div>
-              <div className="lbl">Bins Nearby</div>
-            </div>
-            <div className="mini-stat">
-              <div className="num">12kg</div>
-              <div className="lbl">Waste Diverted</div>
-            </div>
-          </div>
+
+            <button type="submit" className="home-login-submit-btn">
+              Sign In
+            </button>
+          </form>
         </aside>
       </main>
 
-      <div className="home-footer-note">© 2026 EcoDrop | Designed & Developed with ♻ for a greener future. All rights reserved.</div>
+      <div className="home-footer-note">
+        © 2026 EcoDrop | Designed &amp; Developed with ♻ for a greener future. All rights reserved.
+      </div>
+
+      <button
+        type="button"
+        className="home-help-fab"
+        onClick={() => navigate('/about')}
+        title="About EcoDrop"
+      >
+        ?
+      </button>
     </div>
   );
 }

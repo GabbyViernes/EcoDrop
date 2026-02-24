@@ -5,7 +5,6 @@ import '../styles/DepositLogsPage.css';
 const DepositLogsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Sample deposit data
   const deposits = [
     {
       id: 'TXN-001',
@@ -27,7 +26,6 @@ const DepositLogsPage = () => {
     }
   ];
 
-  // Filter deposits by search
   const filteredDeposits = deposits.filter(
     (d) =>
       d.id.toLowerCase().includes(searchQuery.toLowerCase()) ||

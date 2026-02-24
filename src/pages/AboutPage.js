@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AboutPage.css';
 import backgroundImage from '../assets/images/EcoDrop-AboutBG.png';
-import Navbar from '../components/Sidebar';
 
 function AboutPage() {
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ function AboutPage() {
       className="about-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <Navbar />
 
       <div className="about-container">
         <div className="about-hero">
