@@ -10,6 +10,8 @@ function NavigationBar() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileRef = useRef(null);
 
+  const username = localStorage.getItem('ecodropUser') || 'Admin';
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -28,6 +30,7 @@ function NavigationBar() {
 
   function handleLogoutClick() {
     localStorage.removeItem('ecodropLoggedIn');
+    localStorage.removeItem('ecodropUser'); 
     navigate('/', { replace: true });
   }
 
@@ -78,7 +81,7 @@ function NavigationBar() {
             className="profile-trigger"
             onClick={() => setShowProfileMenu(!showProfileMenu)}
           >
-            <span>Admin</span>
+            <span>{username}</span>
             <div className="profile-circle"></div>
           </div>
 

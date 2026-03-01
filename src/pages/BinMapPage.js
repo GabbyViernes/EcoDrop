@@ -35,8 +35,65 @@ const BinMapPage = () => {
           <div className="map-wrapper">
             <img src={BinMapImage} alt="Bin Map" className="binmap-image" />
           </div>
+<<<<<<< HEAD
           {/* Extracted UI element */}
           <BinDetailCard details={binDetails} /> 
+=======
+
+          <div className="bin-detail-card">
+            <div className="bin-detail-header">
+              <span className="bin-id">{binDetails.id}</span>
+              <span className={`bin-status-badge ${binDetails.status.toLowerCase()}`}>
+                {binDetails.status}
+              </span>
+            </div>
+
+            <p className="bin-location-name">{binDetails.location}</p>
+            <p className="bin-address">{binDetails.address}</p>
+
+            <div className="bin-fill-section">
+              <div className="bin-fill-label">
+                <span>Fill Level</span>
+                <span className="bin-fill-percent" style={{ color: fillColor }}>
+                  {binDetails.fillLevel}%
+                </span>
+              </div>
+              <div className="bin-fill-bar-bg">
+                <div
+                  className="bin-fill-bar"
+                  style={{ width: `${binDetails.fillLevel}%`, backgroundColor: fillColor }}
+                />
+              </div>
+            </div>
+
+            <div className="bin-info-grid">
+              <div className="bin-info-item">
+                <span className="bin-info-label">Type</span>
+                <span className="bin-info-value">{binDetails.type}</span>
+              </div>
+              <div className="bin-info-item">
+                <span className="bin-info-label">Capacity</span>
+                <span className="bin-info-value">{binDetails.capacity}</span>
+              </div>
+              <div className="bin-info-item">
+                <span className="bin-info-label">Current Load</span>
+                <span className="bin-info-value">{binDetails.currentLoad}</span>
+              </div>
+              <div className="bin-info-item">
+                <span className="bin-info-label">Coordinates</span>
+                <span className="bin-info-value">{binDetails.coordinates}</span>
+              </div>
+              <div className="bin-info-item">
+                <span className="bin-info-label">Last Emptied</span>
+                <span className="bin-info-value">{binDetails.lastEmptied}</span>
+              </div>
+              <div className="bin-info-item">
+                <span className="bin-info-label">Next Collection</span>
+                <span className="bin-info-value">{binDetails.nextCollection}</span>
+              </div>
+            </div>
+          </div>
+>>>>>>> d064b8e5e988aa022e24c04bcfda8295552cda57
         </div>
       </main>
 
