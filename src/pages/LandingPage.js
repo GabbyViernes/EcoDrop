@@ -116,7 +116,7 @@ const handleLoginSubmit = function (e) {
             </button>
 
             <div className="switch-auth-row">
-              <span>Don&apos;t have an account?</span>
+              <span>Don't have an account?</span>
               <button
                 type="button"
                 className="switch-auth-btn"

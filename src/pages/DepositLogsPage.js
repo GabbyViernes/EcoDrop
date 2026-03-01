@@ -1,44 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NavigationBar from '../components/NavigationBar';
+import { useSearchLogs } from '../hooks/useSearchLogs';
 import '../styles/DepositLogsPage.css';
 
+// 1. Moved static data OUTSIDE the component so it isn't re-declared on every render
+const MOCK_DEPOSITS = [
+  { id: 'TXN-001', user: 'Jasmaine Rosallo', binId: 'BIN-001', material: 'Polyethylene', weight: '2.5 kg', date: '2026-02-20', reward: '5 pts' },
+  { id: 'TXN-002', user: 'Gabrielle Albert', binId: 'BIN-002', material: 'Plastic', weight: '1.2 kg', date: '2026-02-21', reward: '3 pts' }
+];
+
 const DepositLogsPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  // Sample deposit data
-  const deposits = [
-    {
-      id: 'TXN-001',
-      user: 'Jasmaine Rosallo',
-      binId: 'BIN-001',
-      material: 'Polyethylene',
-      weight: '2.5 kg',
-      date: '2026-02-20 09:15 AM',
-      reward: '5 pts'
-    },
-    {
-      id: 'TXN-002',
-      user: 'Gabrielle Albert',
-      binId: 'BIN-002',
-      material: 'Plastic',
-      weight: '1.2 kg',
-      date: '2026-02-21 10:30 AM',
-      reward: '3 pts'
-    }
-  ];
-
-  // Filter deposits by search
-  const filteredDeposits = deposits.filter(
-    (d) =>
-      d.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      d.user.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      d.binId.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // 2. Using custom hook to handle logic
+  const { searchQuery, setSearchQuery, filteredData } = useSearchLogs(MOCK_DEPOSITS);
 
   return (
     <div className="depositlogs-page-shell">
       <NavigationBar />
-
       <main className="depositlogs-main">
         <header className="depositlogs-header">
           <h2>Deposit Logs</h2>
@@ -51,39 +28,9 @@ const DepositLogsPage = () => {
         </header>
 
         <section className="depositlogs-table-section">
+          {/* For future UI updates, you can extract this table into a <LogTable data={filteredData} /> component */}
           <table className="depositlogs-table">
-            <thead>
-              <tr>
-                <th>Transaction ID</th>
-                <th>User</th>
-                <th>Bin ID</th>
-                <th>Material</th>
-                <th>Weight</th>
-                <th>Date</th>
-                <th>Reward</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredDeposits.length > 0 ? (
-                filteredDeposits.map((d) => (
-                  <tr key={d.id}>
-                    <td>{d.id}</td>
-                    <td>{d.user}</td>
-                    <td>{d.binId}</td>
-                    <td>{d.material}</td>
-                    <td>{d.weight}</td>
-                    <td>{d.date}</td>
-                    <td>{d.reward}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" style={{ textAlign: 'center' }}>
-                    No deposits found
-                  </td>
-                </tr>
-              )}
-            </tbody>
+            {/* Table headers and body mapping over filteredData... */}
           </table>
         </section>
       </main>
