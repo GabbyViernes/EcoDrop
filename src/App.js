@@ -9,14 +9,16 @@ import BinMapPage from './pages/BinMapPage';
 import DepositLogsPage from './pages/DepositLogsPage';
 import SignupPage from './pages/SignupPage';
 import HelpPage from './pages/HelpPage';  
+import { AuthProvider, useAuth } from './context/AuthContext';
 
-function ProtectedRoute(props) {
-  const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
-  return isLoggedIn ? props.children : <Navigate to="/landing" replace />;
+function ProtectedRoute({ children }) {
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? children : <Navigate to="/landing" replace />;
 }
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -56,6 +58,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 
