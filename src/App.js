@@ -8,11 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import BinMapPage from './pages/BinMapPage';
 import DepositLogsPage from './pages/DepositLogsPage';
 import SignupPage from './pages/SignupPage';
-<<<<<<< HEAD
 import HelpPage from './pages/HelpPage';  
-=======
-import HelpPage from './pages/HelpPage'; 
->>>>>>> d064b8e5e988aa022e24c04bcfda8295552cda57
 
 function ProtectedRoute(props) {
   const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
@@ -27,14 +23,9 @@ function App() {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/about" element={<AboutPage />} />
-<<<<<<< HEAD
         <Route path="/binmap" element={<BinMapPage />} />
         <Route path="/help" element={<HelpPage />} />
         {/* Protected routes */}
-=======
-        <Route path="/help" element={<HelpPage />} /> 
-
->>>>>>> d064b8e5e988aa022e24c04bcfda8295552cda57
         <Route
           path="/dashboard"
           element={
