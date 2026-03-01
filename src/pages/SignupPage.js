@@ -24,7 +24,7 @@ function SignupPage() {
   }
 
   alert('Account created successfully! You can now log in.');
-  navigate('/landing');
+  navigate('/homepage', { replace: true });
 };
 
   return (

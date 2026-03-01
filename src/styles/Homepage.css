@@ -39,24 +39,33 @@
   font-family: inherit;
   transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.btn:hover  { transform: translateY(-1px); }
-.btn:active { transform: scale(0.97); }
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
 
 .btn-outline {
   background: rgba(255, 255, 255, 0.68);
   border: 1px solid rgba(47, 111, 63, 0.25);
   color: #214f2d;
 }
+
 .btn-primary {
   background: linear-gradient(180deg, #355f2e, #223e1e);
   color: #fff;
   box-shadow: 0 8px 18px rgba(34, 62, 30, 0.28);
 }
+
 .btn-soft {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(47, 111, 63, 0.12);
   color: #2c5d38;
 }
+
 .btn-lg {
   padding: 12px 18px;
   border-radius: 14px;
@@ -146,7 +155,7 @@
   margin: 0;
   color: #2f4f2f;
   text-align: center;
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
@@ -232,6 +241,7 @@
   font-weight: 600;
   transition: color 0.15s;
 }
+
 .home-forgot-password:hover {
   color: #2f6f3f;
   text-decoration: underline;
@@ -252,12 +262,43 @@
   transition: transform 0.15s ease, box-shadow 0.2s ease;
   margin-top: 2px;
 }
+
 .home-login-submit-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 22px rgba(34, 62, 30, 0.3);
 }
+
 .home-login-submit-btn:active {
   transform: scale(0.98);
+}
+
+.home-switch-auth-row {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4a8c50;
+}
+
+.home-switch-auth-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 4px;
+  color: #4a8c50;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.home-switch-auth-btn:hover {
+  color: #2f6f3f;
+}
+
+.home-switch-auth-btn:active {
+  opacity: 0.8;
 }
 
 .home-footer-note {

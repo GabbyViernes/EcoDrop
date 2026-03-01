@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatCard from '../components/StatCard';
 import NavigationBar from '../components/NavigationBar';
+import DisplayNamePrompt from '../components/DisplayNamePrompt';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png';
 
 function DashboardPage() {
-  var navigate = useNavigate();
+  const navigate = useNavigate();
 
-  var stats = [
+  const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
+
+  const stats = [
     { label: 'Total Plastic Diverted', value: '1,240 kg', icon: '🌱' },
     { label: 'Active User Growth', value: '+15%', icon: '📈' },
     { label: 'Total Rewards Claimed', value: '850', icon: '🎁' }
   ];
+
+  useEffect(() => {
+    const savedDisplayName = localStorage.getItem('ecodropDisplayName');
+
+    if (!savedDisplayName) {
+      setShowDisplayNamePrompt(true);
+    }
+  }, []);
+
+  function handleCloseDisplayNamePrompt() {
+    setShowDisplayNamePrompt(false);
+  }
 
   return (
     <div className="dashboard-page-shell">
@@ -22,13 +37,19 @@ function DashboardPage() {
 
       <NavigationBar />
 
+      {showDisplayNamePrompt && (
+        <DisplayNamePrompt onClose={handleCloseDisplayNamePrompt} />
+      )}
+
       <main className="dashboard-content">
         <section className="dashboard-title-card">
           <div>
             <h1>EcoDrop Admin Dashboard</h1>
             <p>Monitor bin activity, recycling progress, and recent deposit transactions.</p>
           </div>
-          <button className="add-bin-btn" type="button">+ Add EcoBin</button>
+          <button className="add-bin-btn" type="button">
+            + Add EcoBin
+          </button>
         </section>
 
         <section className="analytics-grid">

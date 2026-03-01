@@ -1,0 +1,115 @@
+.display-name-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: overlayFadeIn 0.25s ease-out;
+}
+
+.display-name-modal {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  animation: modalPopIn 0.35s ease-out;
+  transform-origin: center;
+}
+
+.display-name-modal h2 {
+  margin: 0 0 10px;
+  color: #2f4f2f;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.display-name-modal p {
+  margin: 0 0 18px;
+  color: #55704e;
+  font-size: 0.95rem;
+}
+
+.display-name-modal input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(47, 111, 63, 0.2);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  outline: none;
+  font-family: inherit;
+}
+
+.display-name-modal input:focus {
+  border-color: #4a8c50;
+  box-shadow: 0 0 0 3px rgba(74, 140, 80, 0.12);
+}
+
+.display-name-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.display-name-save-btn,
+.display-name-skip-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+}
+
+.display-name-save-btn:hover,
+.display-name-skip-btn:hover {
+  transform: translateY(-1px);
+}
+
+.display-name-save-btn:active,
+.display-name-skip-btn:active {
+  transform: scale(0.98);
+}
+
+.display-name-save-btn {
+  background: linear-gradient(180deg, #355f2e, #223e1e);
+  color: #fff;
+}
+
+.display-name-skip-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #2f5d34;
+  border: 1px solid rgba(47, 111, 63, 0.18);
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

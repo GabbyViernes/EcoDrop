@@ -1,14 +1,11 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const storedStatus = localStorage.getItem('ecodropLoggedIn') === 'true';
-    setIsLoggedIn(storedStatus);
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem('ecodropLoggedIn') === 'true'
+  );
 
   const login = () => {
     localStorage.setItem('ecodropLoggedIn', 'true');
@@ -17,6 +14,8 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('ecodropLoggedIn');
+    localStorage.removeItem('ecodropUser');
+    localStorage.removeItem('ecodropDisplayName');
     setIsLoggedIn(false);
   };
 

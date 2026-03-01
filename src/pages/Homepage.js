@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Homepage.css';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
 
-function HomePage() {
+function Homepage() {
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
+  const { login, isLoggedIn } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -18,21 +19,37 @@ function HomePage() {
       navigate('/dashboard');
       return;
     }
-    navigate('/landing');
+    navigate('/signup');
   }
 
   function handleLoginSubmit(e) {
     e.preventDefault();
-    const username = email.split('@')[0];
-    localStorage.setItem('ecodropLoggedIn', 'true');
-    localStorage.setItem('ecodropUser', username);
+
+    login();
+    localStorage.setItem('ecodropUser', 'Admin');
+    localStorage.setItem('ecodropEmail', email);
+
+    if (rememberMe) {
+      localStorage.setItem('ecodropRememberMe', 'true');
+    } else {
+      localStorage.removeItem('ecodropRememberMe');
+    }
+
     navigate('/dashboard', { replace: true });
+  }
+
+  function handleGoToSignup() {
+    navigate('/signup');
   }
 
   return (
     <div className="home-page-shell">
       <div className="home-bg-layer">
-        <img src={ecodrophomebg} alt="EcoDrop background" className="home-bg-image" />
+        <img
+          src={ecodrophomebg}
+          alt="EcoDrop background"
+          className="home-bg-image"
+        />
       </div>
 
       <main className="home-hero">
@@ -58,7 +75,7 @@ function HomePage() {
             <button
               type="button"
               className="btn btn-soft btn-lg"
-              onClick={() => navigate('/binmap', { replace: isLoggedIn })}
+              onClick={() => navigate('/binmap')}
             >
               Find Bin Near Me
             </button>
@@ -114,6 +131,7 @@ function HomePage() {
                 />
                 <span>Remember Me</span>
               </label>
+
               <a href="#forgot" className="home-forgot-password">
                 Forgot Password?
               </a>
@@ -122,6 +140,17 @@ function HomePage() {
             <button type="submit" className="home-login-submit-btn">
               Sign In
             </button>
+
+            <div className="home-switch-auth-row">
+              <span>Don&apos;t have an account? </span>
+              <button
+                type="button"
+                className="home-switch-auth-btn"
+                onClick={handleGoToSignup}
+              >
+                Sign up here
+              </button>
+            </div>
           </form>
         </aside>
       </main>
@@ -142,4 +171,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Homepage;
