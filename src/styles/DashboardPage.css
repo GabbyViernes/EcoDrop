@@ -554,4 +554,68 @@
     padding: 10px 12px;
     font-size: 0.85rem;
   }
+/* --- Search Suggestions Dropdown FIX --- */
+}
+.search-bar {
+  position: relative !important; /* CRITICAL: Anchors the absolute dropdown to this div */
+}
+
+.search-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 8px); /* Pushes it exactly below the search input */
+  left: 0;
+  width: 100%; /* Matches the exact width of the search bar */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 9999; /* Forces it to float completely over the page */
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: transparent; 
+}
+
+/* Individual Rectangles */
+.suggestion-item {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db; 
+  border-radius: 6px;
+  margin-bottom: 6px; /* Spacing between rectangles */
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Slight shadow to lift them off the page */
+  transition: all 0.2s ease;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background-color: #f0fdf4; 
+  border-color: #86efac;
+  transform: translateY(-1px);
+}
+
+/* "Label : stuff" Formatting */
+.suggestion-type {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Custom colors for different types */
+.type-user { color: #0284c7; } 
+.type-bin { color: #ca8a04; } 
+.type-transaction { color: #475569; } 
+
+.suggestion-separator {
+  font-weight: 700;
+  color: #9ca3af;
+  margin: 0 6px;
+}
+
+.suggestion-label {
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 500;
 }

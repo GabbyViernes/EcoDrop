@@ -1,9 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export const useSearchLogs = (initialData) => {
-  const [searchQuery, setSearchQuery] = useState('');
+ 
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
 
-  // useMemo prevents recalculating the filter on every render unless dependencies change
   const filteredData = useMemo(() => {
     if (!searchQuery) return initialData;
     const lowerQuery = searchQuery.toLowerCase();
@@ -16,5 +18,6 @@ export const useSearchLogs = (initialData) => {
     );
   }, [searchQuery, initialData]);
 
-  return { searchQuery, setSearchQuery, filteredData };
+  
+  return { filteredData };
 };
