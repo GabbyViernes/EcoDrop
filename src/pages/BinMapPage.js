@@ -16,26 +16,41 @@ const BinMapPage = () => {
     collectionSchedule: '',
   });
 
-  const binDetails = {
-    id: 'BIN-001',
-    location: 'Limketkai Center',
-    address: 'Limketkai Dr, Cagayan de Oro, 9000 Misamis Oriental',
-    status: 'Critical',
-    fillLevel: 85,
-    lastEmptied: '2026-02-01 08:00 AM',
-    nextCollection: '2026-02-15 08:00 AM',
-    capacity: '20 kg',
-    currentLoad: '17 kg',
-    type: 'Polyethylene',
-    coordinates: '8.4822° N, 124.6472° E',
-  };
+  // 1. Converted single object into an array of bins
+  const mockBins = [
+    {
+      id: 'BIN-001',
+      location: 'Limketkai Center',
+      address: 'Limketkai Dr, Cagayan de Oro, 9000 Misamis Oriental',
+      status: 'Critical',
+      fillLevel: 85,
+      lastEmptied: '2026-02-01 08:00 AM',
+      nextCollection: '2026-02-15 08:00 AM',
+      capacity: '20 kg',
+      currentLoad: '17 kg',
+      type: 'Polyethylene',
+      coordinates: '8.4822° N, 124.6472° E',
+    },
+    {
+      id: 'BIN-002',
+      location: 'SM Downtown Premier',
+      address: 'Claro M. Recto Ave, Cagayan de Oro',
+      status: 'Normal',
+      fillLevel: 45,
+      lastEmptied: '2026-02-12 10:30 AM',
+      nextCollection: '2026-02-16 08:00 AM',
+      capacity: '20 kg',
+      currentLoad: '9 kg',
+      type: 'Mixed Plastic',
+      coordinates: '8.4855° N, 124.6522° E',
+    }
+  ];
 
-  const fillColor =
-    binDetails.fillLevel >= 80
-      ? '#e74c3c'
-      : binDetails.fillLevel >= 50
-      ? '#f39c12'
-      : '#889063';
+  // 2. Filter the bins based on the search bar
+  const filteredBins = mockBins.filter((bin) => 
+    bin.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    bin.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   function handleFormChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -89,58 +104,71 @@ const BinMapPage = () => {
             <img src={BinMapImage} alt="Bin Map" className="binmap-image" />
           </div>
 
-          <div className="bin-detail-card">
-            <div className="bin-detail-header">
-              <span className="bin-id">{binDetails.id}</span>
-              <span className={`bin-status-badge ${binDetails.status.toLowerCase()}`}>
-                {binDetails.status}
-              </span>
-            </div>
+          {/* 3. Render multiple bin cards using .map() */}
+          <div className="bin-cards-container">
+            {filteredBins.length > 0 ? (
+              filteredBins.map((bin) => {
+                const fillColor = bin.fillLevel >= 80 ? '#e74c3c' : bin.fillLevel >= 50 ? '#f39c12' : '#889063';
 
-            <p className="bin-location-name">{binDetails.location}</p>
-            <p className="bin-address">{binDetails.address}</p>
+                return (
+                  <div className="bin-detail-card" key={bin.id}>
+                    <div className="bin-detail-header">
+                      <span className="bin-id">{bin.id}</span>
+                      <span className={`bin-status-badge ${bin.status.toLowerCase()}`}>
+                        {bin.status}
+                      </span>
+                    </div>
 
-            <div className="bin-fill-section">
-              <div className="bin-fill-label">
-                <span>Fill Level</span>
-                <span className="bin-fill-percent" style={{ color: fillColor }}>
-                  {binDetails.fillLevel}%
-                </span>
-              </div>
-              <div className="bin-fill-bar-bg">
-                <div
-                  className="bin-fill-bar"
-                  style={{ width: `${binDetails.fillLevel}%`, backgroundColor: fillColor }}
-                />
-              </div>
-            </div>
+                    <p className="bin-location-name">{bin.location}</p>
+                    <p className="bin-address">{bin.address}</p>
 
-            <div className="bin-info-grid">
-              <div className="bin-info-item">
-                <span className="bin-info-label">Type</span>
-                <span className="bin-info-value">{binDetails.type}</span>
-              </div>
-              <div className="bin-info-item">
-                <span className="bin-info-label">Capacity</span>
-                <span className="bin-info-value">{binDetails.capacity}</span>
-              </div>
-              <div className="bin-info-item">
-                <span className="bin-info-label">Current Load</span>
-                <span className="bin-info-value">{binDetails.currentLoad}</span>
-              </div>
-              <div className="bin-info-item">
-                <span className="bin-info-label">Coordinates</span>
-                <span className="bin-info-value">{binDetails.coordinates}</span>
-              </div>
-              <div className="bin-info-item">
-                <span className="bin-info-label">Last Emptied</span>
-                <span className="bin-info-value">{binDetails.lastEmptied}</span>
-              </div>
-              <div className="bin-info-item">
-                <span className="bin-info-label">Next Collection</span>
-                <span className="bin-info-value">{binDetails.nextCollection}</span>
-              </div>
-            </div>
+                    <div className="bin-fill-section">
+                      <div className="bin-fill-label">
+                        <span>Fill Level</span>
+                        <span className="bin-fill-percent" style={{ color: fillColor }}>
+                          {bin.fillLevel}%
+                        </span>
+                      </div>
+                      <div className="bin-fill-bar-bg">
+                        <div
+                          className="bin-fill-bar"
+                          style={{ width: `${bin.fillLevel}%`, backgroundColor: fillColor }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bin-info-grid">
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Type</span>
+                        <span className="bin-info-value">{bin.type}</span>
+                      </div>
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Capacity</span>
+                        <span className="bin-info-value">{bin.capacity}</span>
+                      </div>
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Current Load</span>
+                        <span className="bin-info-value">{bin.currentLoad}</span>
+                      </div>
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Coordinates</span>
+                        <span className="bin-info-value">{bin.coordinates}</span>
+                      </div>
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Last Emptied</span>
+                        <span className="bin-info-value">{bin.lastEmptied}</span>
+                      </div>
+                      <div className="bin-info-item">
+                        <span className="bin-info-label">Next Collection</span>
+                        <span className="bin-info-value">{bin.nextCollection}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p style={{ textAlign: 'center', color: '#4C3D19', fontWeight: 'bold' }}>No bins found matching your search.</p>
+            )}
           </div>
         </div>
       </main>

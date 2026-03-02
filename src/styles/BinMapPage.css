@@ -138,6 +138,29 @@
   object-fit: cover;
 }
 
+/* --- NEW: Container for multiple scrolling cards --- */
+.bin-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 480px; /* Matches the map image's min-height */
+  overflow-y: auto;
+  padding-right: 8px; /* Adds space so the scrollbar doesn't overlap the card */
+}
+
+/* Custom Webkit Scrollbar for the cards container */
+.bin-cards-container::-webkit-scrollbar {
+  width: 6px;
+}
+.bin-cards-container::-webkit-scrollbar-track {
+  background: rgba(229, 215, 196, 0.3);
+  border-radius: 10px;
+}
+.bin-cards-container::-webkit-scrollbar-thumb {
+  background-color: var(--moss-green);
+  border-radius: 10px;
+}
+
 .bin-detail-card {
   background-color: var(--kombu-green);
   border-radius: 20px;
@@ -147,7 +170,11 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  .bin-actions {
+  flex-shrink: 0; /* Prevents flexbox from squishing the cards */
+}
+
+/* Un-nested .bin-actions for proper standard CSS support */
+.bin-actions {
   display: flex;
   gap: 10px;
   margin-top: 15px;
@@ -187,8 +214,6 @@
   background-color: #bdc3c7;
   cursor: not-allowed;
   opacity: 0.7;
-}
-  
 }
 
 .bin-detail-header {
@@ -504,6 +529,12 @@
 
   .binmap-image {
     min-height: 300px;
+  }
+  
+  /* Reset max-height on mobile so it doesn't get awkwardly small */
+  .bin-cards-container {
+    max-height: none; 
+    overflow-y: visible;
   }
 }
 
