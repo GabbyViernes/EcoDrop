@@ -474,3 +474,66 @@
     font-size: 1.2rem;
   }
 }
+
+body.ecodrop-dark-theme .home-page-shell {
+  background: linear-gradient(180deg, #0a1a14 0%, #111e14 60%, #162414 100%);
+}
+
+body.ecodrop-dark-theme .home-bg-image {
+  opacity: 0.15;
+}
+
+body.ecodrop-dark-theme .hero-glass-card {
+  background: rgba(22, 34, 24, 0.92);
+  border-color: rgba(124, 156, 125, 0.18);
+}
+
+body.ecodrop-dark-theme .hero-glass-card p,
+body.ecodrop-dark-theme .hero-subtitle {
+  color: #b7c8b4;
+}
+
+body.ecodrop-dark-theme .hero-glass-card h3 {
+  color: #e6f2e5;
+}
+
+body.ecodrop-dark-theme .home-form-input {
+  background: rgba(15, 25, 17, 0.95);
+  border-color: rgba(126, 168, 129, 0.2);
+  color: #edf7ec;
+}
+
+body.ecodrop-dark-theme .home-form-input::placeholder {
+  color: #7f9681;
+}
+
+body.ecodrop-dark-theme .home-tab-btn {
+  color: #a8c4a5;
+}
+
+body.ecodrop-dark-theme .home-tab-active {
+  color: #e6f2e5;
+}
+
+body.ecodrop-dark-theme .home-tab-divider {
+  color: #4a6b47;
+}
+
+body.ecodrop-dark-theme .home-remember-me,
+body.ecodrop-dark-theme .home-forgot-password {
+  color: #8abf8d;
+}
+
+body.ecodrop-dark-theme .home-switch-auth-row {
+  color: #9ab898;
+}
+
+body.ecodrop-dark-theme .hero-pill {
+  background: rgba(34, 50, 36, 0.85);
+  border-color: rgba(126, 168, 129, 0.2);
+  color: #b7d4b4;
+}
+
+body.ecodrop-dark-theme .home-footer-note {
+  color: #7a9e77;
+}

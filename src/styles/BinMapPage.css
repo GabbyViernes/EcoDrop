@@ -565,3 +565,52 @@
     right: 20px;
   }
 }
+
+body.ecodrop-dark-theme .binmap-page-shell {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255,255,255,0.04) 0 6%, transparent 7%),
+    linear-gradient(180deg, #0f1a12 0%, #18241a 58%, #1e2e1e 100%);
+}
+
+body.ecodrop-dark-theme .hill.h1 { background: #1a2e1a; }
+body.ecodrop-dark-theme .hill.h2 { background: #152815; }
+body.ecodrop-dark-theme .hill.h3 { background: #102210; }
+
+body.ecodrop-dark-theme .binmap-header,
+body.ecodrop-dark-theme .map-wrapper {
+  background: rgba(18, 28, 20, 0.88);
+  border-color: rgba(124, 156, 125, 0.14);
+}
+
+body.ecodrop-dark-theme .binmap-title {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .binmap-search-bar {
+  background: rgba(15, 23, 17, 0.95);
+  border-color: rgba(126, 168, 129, 0.2);
+}
+
+body.ecodrop-dark-theme .binmap-search-bar input {
+  color: #edf7ec;
+}
+
+body.ecodrop-dark-theme .modal-card {
+  background: rgba(22, 32, 24, 0.98);
+  border-color: rgba(124, 156, 125, 0.2);
+}
+
+body.ecodrop-dark-theme .modal-header h3 {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .modal-form-group label {
+  color: #a8c8a5;
+}
+
+body.ecodrop-dark-theme .modal-form-group input,
+body.ecodrop-dark-theme .modal-form-group select {
+  background: rgba(15, 23, 17, 0.95);
+  border-color: rgba(126, 168, 129, 0.18);
+  color: #edf7ec;
+}

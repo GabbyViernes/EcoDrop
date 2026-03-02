@@ -632,3 +632,81 @@
   color: #1f2937;
   font-weight: 500;
 }
+
+body.ecodrop-dark-theme .dashboard-page-shell {
+  background: linear-gradient(180deg, #0f1a12 0%, #18241a 55%, #243427 100%);
+}
+
+body.ecodrop-dark-theme .hill.h1 { background: #1a2e1a; }
+body.ecodrop-dark-theme .hill.h2 { background: #152815; }
+body.ecodrop-dark-theme .hill.h3 { background: #102210; }
+
+body.ecodrop-dark-theme .dashboard-topbar {
+  background: rgba(18, 28, 20, 0.92);
+  border-color: rgba(124, 156, 125, 0.14);
+}
+
+body.ecodrop-dark-theme .dashboard-title-card,
+body.ecodrop-dark-theme .map-card,
+body.ecodrop-dark-theme .bin-status-card,
+body.ecodrop-dark-theme .logs-section {
+  background: rgba(22, 34, 24, 0.88);
+  border-color: rgba(124, 156, 125, 0.14);
+  color: #e0eedf;
+}
+
+body.ecodrop-dark-theme .dashboard-title-card h1,
+body.ecodrop-dark-theme .map-card h3,
+body.ecodrop-dark-theme .bin-status-card h3,
+body.ecodrop-dark-theme .logs-section h3 {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .dashboard-title-card p {
+  color: #a8bea5;
+}
+
+body.ecodrop-dark-theme .logs-table th {
+  color: #a8bea5;
+  border-color: rgba(124, 156, 125, 0.15);
+}
+
+body.ecodrop-dark-theme .logs-table td {
+  color: #d4e8d2;
+  border-color: rgba(124, 156, 125, 0.1);
+}
+
+body.ecodrop-dark-theme .logs-table tbody tr:hover {
+  background: rgba(60, 90, 60, 0.3);
+}
+
+body.ecodrop-dark-theme .dashboard-topbar {
+  background: rgba(14, 22, 16, 0.95);
+  border-color: rgba(124, 156, 125, 0.12);
+}
+
+body.ecodrop-dark-theme .dashboard-nav button {
+  color: #b7c8b4;
+}
+
+body.ecodrop-dark-theme .dashboard-nav button:hover {
+  background: rgba(60, 90, 60, 0.4);
+  color: #e0eedf;
+}
+
+body.ecodrop-dark-theme .profile-trigger span {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .dropdown-menu {
+  background: rgba(18, 28, 20, 0.97);
+  border-color: rgba(124, 156, 125, 0.15);
+}
+
+body.ecodrop-dark-theme .dropdown-item {
+  color: #c8ddc5;
+}
+
+body.ecodrop-dark-theme .dropdown-item:hover {
+  background: rgba(60, 90, 60, 0.35);
+}

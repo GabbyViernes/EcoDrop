@@ -374,3 +374,53 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+body.ecodrop-dark-theme .depositlogs-page-shell {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255,255,255,0.03) 0 6%, transparent 7%),
+    linear-gradient(180deg, #0f1a12 0%, #18241a 58%, #1e2e1e 100%);
+}
+
+body.ecodrop-dark-theme .hill.h1 { background: #1a2e1a; }
+body.ecodrop-dark-theme .hill.h2 { background: #152815; }
+body.ecodrop-dark-theme .hill.h3 { background: #102210; }
+
+body.ecodrop-dark-theme .depositlogs-header,
+body.ecodrop-dark-theme .logs-table-card,
+body.ecodrop-dark-theme .logs-summary-card {
+  background: rgba(18, 28, 20, 0.88);
+  border-color: rgba(124, 156, 125, 0.14);
+}
+
+body.ecodrop-dark-theme .depositlogs-title,
+body.ecodrop-dark-theme .logs-table-title {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .depositlogs-search-bar {
+  background: rgba(15, 23, 17, 0.95);
+  border-color: rgba(126, 168, 129, 0.2);
+}
+
+body.ecodrop-dark-theme .depositlogs-search-bar input {
+  color: #edf7ec;
+}
+
+body.ecodrop-dark-theme .logs-table th {
+  color: #a8bea5;
+}
+
+body.ecodrop-dark-theme .logs-table td {
+  color: #d4e8d2;
+  border-color: rgba(124, 156, 125, 0.1);
+}
+
+body.ecodrop-dark-theme .row-even { background: rgba(22, 34, 24, 0.6); }
+body.ecodrop-dark-theme .row-odd  { background: rgba(30, 46, 32, 0.5); }
+
+body.ecodrop-dark-theme .user-name  { color: #d9ead6; }
+body.ecodrop-dark-theme .user-id    { color: #7fa07c; }
+body.ecodrop-dark-theme .weight-cell { color: #b7d4b4; }
+body.ecodrop-dark-theme .timestamp-cell { color: #8aab87; }
+body.ecodrop-dark-theme .summary-value { color: #c8e0c5; }
+body.ecodrop-dark-theme .summary-label { color: #7fa07c; }
