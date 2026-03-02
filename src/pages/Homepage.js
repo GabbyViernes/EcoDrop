@@ -7,9 +7,7 @@ import ecodrophomebg from '../assets/images/ecodrophomebg.png';
 
 function HomePage() {
   const navigate = useNavigate();
-  const { login } = useAuth();
-
-  const isLoggedIn = localStorage.getItem('ecodropLoggedIn') === 'true';
+  const { login, isLoggedIn } = useAuth();
 
   const [activeTab, setActiveTab] = useState('signin');
 
