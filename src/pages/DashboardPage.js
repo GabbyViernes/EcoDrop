@@ -5,12 +5,13 @@ import NavigationBar from '../components/NavigationBar';
 import DisplayNamePrompt from '../components/DisplayNamePrompt';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png';
+import { useBins } from '../context/BinContext';  
 
 function DashboardPage() {
   const navigate = useNavigate();
 
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
-
+  const { bins } = useBins(); // <-- GRAB BINS FROM CONTEXT
   const stats = [
     { label: 'Total Plastic Diverted', value: '1,240 kg', icon: '🌱' },
     { label: 'Active User Growth', value: '+15%', icon: '📈' },
@@ -73,21 +74,19 @@ function DashboardPage() {
           <div className="bin-status-card">
             <h3>Live Bin Status</h3>
             <div className="bin-list">
-              <div className="bin-item">
-                <span>BIN-001 (Limketkai)</span>
-                <div className="progress-container">
-                  <div className="progress-bar critical" style={{ width: '85%' }}></div>
-                </div>
-                <span className="percent">85%</span>
-              </div>
-
-              <div className="bin-item">
-                <span>BIN-002 (SM Downtown)</span>
-                <div className="progress-container">
-                  <div className="progress-bar normal" style={{ width: '45%' }}></div>
-                </div>
-                <span className="percent">45%</span>
-              </div>
+              {bins.map((bin) => {
+                const isCritical = bin.fillLevel >= 80;
+                const barClass = isCritical ? 'critical' : (bin.fillLevel === 0 ? 'empty' : 'normal');
+                return (
+                  <div className="bin-item" key={bin.id}>
+                    <span>{bin.id} ({bin.location})</span>
+                    <div className="progress-container">
+                      <div className={`progress-bar ${barClass}`} style={{ width: `${bin.fillLevel}%` }}></div>
+                    </div>
+                    <span className="percent">{bin.fillLevel}%</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

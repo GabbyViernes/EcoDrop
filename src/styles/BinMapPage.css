@@ -116,7 +116,7 @@
 
 .binmap-content {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 450px;
   gap: 20px;
   align-items: start;
 }
@@ -143,9 +143,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: 480px; /* Matches the map image's min-height */
-  overflow-y: auto;
-  padding-right: 8px; /* Adds space so the scrollbar doesn't overlap the card */
+  max-height: auto;
+  overflow-y: visible;
+  padding-right: 0px; 
 }
 
 /* Custom Webkit Scrollbar for the cards container */
@@ -539,9 +539,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-height: 75vh;
-    overflow-y: auto;
-    padding-right: 8px;
+    height: auto;
+    overflow-y: visible;
+    padding-right: 0;
   }
 }
 

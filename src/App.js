@@ -10,6 +10,7 @@ import SignupPage from './pages/SignupPage';
 import HelpPage from './pages/HelpPage';
 import SettingsPage from './pages/SettingsPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { BinProvider } from './context/BinContext'; // <-- ADDED THIS
 
 function ProtectedRoute({ children }) {
   const { isLoggedIn } = useAuth();
@@ -19,47 +20,24 @@ function ProtectedRoute({ children }) {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/help" element={<HelpPage />} />
+      <BinProvider> {/* <-- WRAPPED ROUTER WITH THIS */}
+        <Router>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/help" element={<HelpPage />} />
 
-          {/* public bin map */}
-          <Route path="/binmap" element={<BinMapPage />} />
+            <Route path="/binmap" element={<BinMapPage />} />
 
-          {/* protected routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
-          />
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/depositlogs" element={<ProtectedRoute><DepositLogsPage /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
 
-          <Route
-            path="/depositlogs"
-            element={
-              <ProtectedRoute>
-                <DepositLogsPage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <SettingsPage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </BinProvider>
     </AuthProvider>
   );
 }
