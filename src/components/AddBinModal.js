@@ -1,7 +1,6 @@
 import React from 'react';
 
 const AddBinModal = ({ formData, onChange, onSubmit, onClose }) => {
-  // Close the modal if the user clicks the dark background outside the modal card
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains('modal-overlay')) {
       onClose();

@@ -207,7 +207,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: var(--kombu-green);
+  color: var(--bone);
   white-space: nowrap;
   border-bottom: 1px solid rgba(207, 187, 153, 0.4);
 }

@@ -190,7 +190,6 @@ function HomePage() {
               </>
             )}
 
-            {/* ── SIGN UP FORM ── */}
             {activeTab === 'signup' && (
               <>
                 <p>Join EcoDrop and start making an impact today.</p>

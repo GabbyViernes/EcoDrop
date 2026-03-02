@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useBins } from '../context/BinContext';
 
 export function useAddBinForm() {
-  const { bins, addBin } = useBins(); // Grab bins and function from Context!
+  const { bins, addBin } = useBins(); 
   const [showModal, setShowModal] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ export function useAddBinForm() {
       coordinates: formData.coordinates,
     };
 
-    addBin(newBin); // Call our global function
+    addBin(newBin); 
     alert(`EcoBin "${formData.binId}" at "${formData.location}" has been added!`);
     
     setShowModal(false);

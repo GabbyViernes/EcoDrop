@@ -11,7 +11,7 @@ function DashboardPage() {
   const navigate = useNavigate();
 
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
-  const { bins } = useBins(); // <-- GRAB BINS FROM CONTEXT
+  const { bins } = useBins(); 
   const stats = [
     { label: 'Total Plastic Diverted', value: '1,240 kg', icon: '🌱' },
     { label: 'Active User Growth', value: '+15%', icon: '📈' },

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import BinMapImage from '../assets/images/BinMapImage.png';
-import { useAddBinForm } from '../hooks/useAddBinForm'; // Import the hook!
+import { useAddBinForm } from '../hooks/useAddBinForm';
 import '../styles/BinMapPage.css';
 
 const BinMapPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Grab all our state and logic from our custom hook
   const {
     bins,
     showModal,
@@ -17,7 +16,6 @@ const BinMapPage = () => {
     handleFormSubmit
   } = useAddBinForm();
 
-  // Filter the bins pulled from the hook
   const filteredBins = bins.filter((bin) => 
     bin.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
     bin.location.toLowerCase().includes(searchQuery.toLowerCase())
