@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../styles/LandingPage.css';
 import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
@@ -11,6 +12,8 @@ function LandingPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  
+  const { login, isLoggedIn } = useAuth(); 
 
   const handleLoginClick = function () {
     setShowLoginForm(true);
@@ -26,9 +29,7 @@ function LandingPage() {
 
 const handleLoginSubmit = function (e) {
   e.preventDefault();
-
-  localStorage.setItem('ecodropLoggedIn', 'true');
-
+  login(email, password);
   navigate('/dashboard', { replace: true });
 };
 

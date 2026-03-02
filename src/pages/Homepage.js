@@ -96,7 +96,8 @@ function HomePage() {
                   navigate('/binmap');
                 } else {
                   alert('Please sign in to locate bins near you!');
-                  setActiveTab('signin');
+                  const emailInput = document.querySelector('input[type="email"]');
+                  if(emailInput) emailInput.focus();
                 }
                }}
             >
