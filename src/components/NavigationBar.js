@@ -9,6 +9,9 @@ const MOCK_SEARCH_DATA = [
   { type: 'Transaction', label: 'TXN-002', id: 'TXN-002' },
   { type: 'User', label: 'Jasmaine Rosallo', id: 'Jasmaine Rosallo' },
   { type: 'User', label: 'Gabrielle Albert', id: 'Gabrielle Albert' },
+  { type: 'User', label: 'Gypsy Dane Carano-o', id: 'Gypsy Dane Carano-o' },
+  { type: 'User', label: 'Jessel Fabi', id: 'Jessel Fabi' },
+  { type: 'User', label: 'Maria Clara', id: 'Maria Clara' },
   { type: 'Bin', label: 'BIN-001 (Limketkai)', id: 'BIN-001' },
   { type: 'Bin', label: 'BIN-002 (SM Downtown)', id: 'BIN-002' }
 ];

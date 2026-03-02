@@ -23,12 +23,12 @@ function DisplayNamePrompt(props) {
   return (
     <div className="display-name-overlay">
       <div className="display-name-modal">
-        <h2>Welcome to EcoDrop</h2>
+        <h2>Welcome to EcoDrop!</h2>
         <p>What should EcoDrop call you?</p>
 
         <input
           type="text"
-          placeholder="Enter your name or nickname"
+          placeholder="Enter your name or nickname."
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
         />
