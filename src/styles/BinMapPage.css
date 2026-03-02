@@ -528,13 +528,20 @@
   }
 
   .binmap-image {
+    width: 100%;
     min-height: 300px;
+    display: block;
+    object-fit: cover;
   }
   
   /* Reset max-height on mobile so it doesn't get awkwardly small */
   .bin-cards-container {
-    max-height: none; 
-    overflow-y: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 8px;
   }
 }
 

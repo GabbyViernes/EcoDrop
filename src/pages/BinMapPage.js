@@ -1,75 +1,27 @@
 import React, { useState } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import BinMapImage from '../assets/images/BinMapImage.png';
+import { useAddBinForm } from '../hooks/useAddBinForm'; // Import the hook!
 import '../styles/BinMapPage.css';
 
 const BinMapPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    binId: '',
-    location: '',
-    address: '',
-    coordinates: '',
-    capacity: '',
-    type: '',
-    collectionSchedule: '',
-  });
+  
+  // Grab all our state and logic from our custom hook
+  const {
+    bins,
+    showModal,
+    setShowModal,
+    formData,
+    handleFormChange,
+    handleFormSubmit
+  } = useAddBinForm();
 
-  // 1. Converted single object into an array of bins
-  const mockBins = [
-    {
-      id: 'BIN-001',
-      location: 'Limketkai Center',
-      address: 'Limketkai Dr, Cagayan de Oro, 9000 Misamis Oriental',
-      status: 'Critical',
-      fillLevel: 85,
-      lastEmptied: '2026-02-01 08:00 AM',
-      nextCollection: '2026-02-15 08:00 AM',
-      capacity: '20 kg',
-      currentLoad: '17 kg',
-      type: 'Polyethylene',
-      coordinates: '8.4822° N, 124.6472° E',
-    },
-    {
-      id: 'BIN-002',
-      location: 'SM Downtown Premier',
-      address: 'Claro M. Recto Ave, Cagayan de Oro',
-      status: 'Normal',
-      fillLevel: 45,
-      lastEmptied: '2026-02-12 10:30 AM',
-      nextCollection: '2026-02-16 08:00 AM',
-      capacity: '20 kg',
-      currentLoad: '9 kg',
-      type: 'Mixed Plastic',
-      coordinates: '8.4855° N, 124.6522° E',
-    }
-  ];
-
-  // 2. Filter the bins based on the search bar
-  const filteredBins = mockBins.filter((bin) => 
+  // Filter the bins pulled from the hook
+  const filteredBins = bins.filter((bin) => 
     bin.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
     bin.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  function handleFormChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    alert(`EcoBin "${formData.binId}" at "${formData.location}" has been added!`);
-    setShowModal(false);
-    setFormData({
-      binId: '',
-      location: '',
-      address: '',
-      coordinates: '',
-      capacity: '',
-      type: '',
-      collectionSchedule: '',
-    });
-  }
 
   function handleOverlayClick(e) {
     if (e.target.classList.contains('modal-overlay')) {
@@ -104,7 +56,6 @@ const BinMapPage = () => {
             <img src={BinMapImage} alt="Bin Map" className="binmap-image" />
           </div>
 
-          {/* 3. Render multiple bin cards using .map() */}
           <div className="bin-cards-container">
             {filteredBins.length > 0 ? (
               filteredBins.map((bin) => {
@@ -276,7 +227,7 @@ const BinMapPage = () => {
                   Cancel
                 </button>
                 <button type="button" className="modal-qr-btn" onClick={() => alert('QR Code generation coming soon.')}>
-                Add QR Code
+                  Add QR Code
                 </button>
                 <button type="submit" className="modal-submit-btn">
                   Add EcoBin
