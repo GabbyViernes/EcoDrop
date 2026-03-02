@@ -1,0 +1,106 @@
+/* Styles for BinDetailCard component - recreated */
+
+.bin-detail-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 300px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.bin-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bin-id {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.bin-status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.bin-status-badge.normal { background: #4caf50; }
+.bin-status-badge.warning { background: #f39c12; }
+.bin-status-badge.critical { background: #e74c3c; }
+
+.bin-location-name {
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.bin-fill-section {
+  margin-bottom: 12px;
+}
+
+.bin-fill-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.bin-fill-percent {
+  font-weight: bold;
+}
+
+.bin-fill-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bin-fill-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bin-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.bin-info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.bin-info-label {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.bin-info-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.bin-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.simulate-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.simulate-btn:hover {
+  background: #0056b3;
+}

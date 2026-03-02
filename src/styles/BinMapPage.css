@@ -147,6 +147,48 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  .bin-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.simulate-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.simulate-btn.deposit {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.simulate-btn.deposit:hover:not(:disabled) {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.simulate-btn.empty {
+  background-color: #3498db;
+  color: white;
+}
+
+.simulate-btn.empty:hover:not(:disabled) {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.simulate-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+  
 }
 
 .bin-detail-header {
