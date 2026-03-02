@@ -180,7 +180,7 @@ function NavigationBar() {
 
   return (
     <header className="dashboard-topbar">
-      <div className="brand-logo" onClick={() => navigate('/')}>
+      <div className="brand-logo" onClick={() => navigate('/dashboard')}>
         <img src={logoWord} alt="EcoDrop" className="brand-logo-img" />
       </div>
 

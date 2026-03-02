@@ -93,7 +93,14 @@ function HomePage() {
             <button
               type="button"
               className="btn btn-soft btn-lg"
-              onClick={() => navigate('/binmap', { replace: isLoggedIn })}
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate('/binmap');
+                } else {
+                  alert('Please sign in to locate bins near you!');
+                  setActiveTab('signin');
+                }
+               }}
             >
               Find Bin Near Me
             </button>
