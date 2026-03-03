@@ -8,7 +8,6 @@ import BinMapImage from '../assets/images/BinMapImage.png';
 import useBins from '../hooks/useBins';
 
 function DashboardPage() {
-  // ...existing code...
 
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
   const { bins } = useBins(); 

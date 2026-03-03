@@ -2,11 +2,12 @@ import { useState } from 'react';
 import useBins from './useBins';
 
 export function useAddBinForm() {
-  const { bins, addBin } = useBins(); 
+  const { bins, addBin, editBin, deleteBin } = useBins();
   const [showModal, setShowModal] = useState(false);
-  
+
   const [formData, setFormData] = useState({
-    binId: '', location: '', address: '', coordinates: '', capacity: '', type: '', collectionSchedule: '',
+    binId: '', location: '', address: '', coordinates: '',
+    capacity: '', type: '', collectionSchedule: '',
   });
 
   function handleFormChange(e) {
@@ -15,7 +16,7 @@ export function useAddBinForm() {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    
+
     const newBin = {
       id: formData.binId,
       location: formData.location,
@@ -30,13 +31,22 @@ export function useAddBinForm() {
       coordinates: formData.coordinates,
     };
 
-    addBin(newBin); 
+    addBin(newBin);
     alert(`EcoBin "${formData.binId}" at "${formData.location}" has been added!`);
-    
+
     setShowModal(false);
     setFormData({
-      binId: '', location: '', address: '', coordinates: '', capacity: '', type: '', collectionSchedule: '',
+      binId: '', location: '', address: '', coordinates: '',
+      capacity: '', type: '', collectionSchedule: '',
     });
+  }
+
+  function handleEditBin(binId, updatedFormData) {
+    editBin(binId, updatedFormData);
+  }
+
+  function handleDeleteBin(binId) {
+    deleteBin(binId);
   }
 
   return {
@@ -45,6 +55,8 @@ export function useAddBinForm() {
     setShowModal,
     formData,
     handleFormChange,
-    handleFormSubmit
+    handleFormSubmit,
+    handleEditBin,
+    handleDeleteBin,
   };
 }

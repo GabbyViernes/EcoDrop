@@ -48,10 +48,30 @@ export const BinProvider = ({ children }) => {
     setBins((prevBins) => [...prevBins, newBin]);
   };
 
+  const editBin = (binId, updatedFormData) => {
+    setBins((prevBins) =>
+      prevBins.map((bin) =>
+        bin.id !== binId ? bin : {
+          ...bin,
+          id: updatedFormData.binId || bin.id,
+          location: updatedFormData.location,
+          address: updatedFormData.address,
+          coordinates: updatedFormData.coordinates,
+          capacity: updatedFormData.capacity,
+          type: updatedFormData.type,
+          nextCollection: updatedFormData.collectionSchedule,
+        }
+      )
+    );
+  };
+
+  const deleteBin = (binId) => {
+    setBins((prevBins) => prevBins.filter((bin) => bin.id !== binId));
+  };
+
   return (
-    <BinContext.Provider value={{ bins, addBin }}>
+    <BinContext.Provider value={{ bins, addBin, editBin, deleteBin }}>
       {children}
     </BinContext.Provider>
   );
 };
-

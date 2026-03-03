@@ -531,7 +531,6 @@
     object-fit: cover;
   }
   
-  /* Reset max-height on mobile so it doesn't get awkwardly small */
   .bin-cards-container {
     display: flex;
     flex-direction: column;
@@ -568,6 +567,105 @@ body.ecodrop-dark-theme .binmap-page-shell {
     radial-gradient(circle at 14% 10%, rgba(255,255,255,0.04) 0 6%, transparent 7%),
     linear-gradient(180deg, #0f1a12 0%, #18241a 58%, #1e2e1e 100%);
 }
+
+.bin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bin-action-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: background 0.18s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.bin-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.edit-btn:hover {
+  background: rgba(255, 220, 100, 0.22);
+  border-color: rgba(255, 220, 100, 0.4);
+}
+
+.delete-btn:hover {
+  background: rgba(231, 76, 60, 0.22);
+  border-color: rgba(231, 76, 60, 0.4);
+}
+
+.delete-confirm-card {
+  max-width: 420px;
+}
+
+.delete-confirm-body {
+  text-align: center;
+  padding: 10px 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-confirm-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.delete-confirm-body p {
+  margin: 0;
+  color: var(--cafe-noir);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.delete-confirm-sub {
+  font-size: 0.90rem !important;
+  font-weight: 400 !important;
+  color: var(--moss-green) !important;
+}
+
+.modal-delete-confirm-btn {
+  padding: 10px 22px;
+  background: linear-gradient(180deg, #c0392b, #962d22);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.93rem;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(192, 57, 43, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.2s;
+}
+
+.modal-delete-confirm-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(192, 57, 43, 0.4);
+}
+
+.modal-delete-confirm-btn:active {
+  transform: scale(0.97);
+}
+
+.bins-empty-msg {
+  text-align: center;
+  color: var(--cafe-noir);
+  font-weight: bold;
+}
+
+/* ── DARK MODE ── */
 
 body.ecodrop-dark-theme .hill.h1 { background: #1a2e1a; }
 body.ecodrop-dark-theme .hill.h2 { background: #152815; }
@@ -610,4 +708,17 @@ body.ecodrop-dark-theme .modal-form-group select {
   background: rgba(15, 23, 17, 0.95);
   border-color: rgba(126, 168, 129, 0.18);
   color: #edf7ec;
+}
+
+body.ecodrop-dark-theme .bin-action-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.ecodrop-dark-theme .delete-confirm-body p {
+  color: #d9ead6;
+}
+
+body.ecodrop-dark-theme .modal-subtitle strong {
+  color: #b7d4b4;
 }

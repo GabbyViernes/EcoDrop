@@ -9,7 +9,6 @@ function HomePage() {
   const navigate = useNavigate();
   const { login, isLoggedIn } = useAuth();
 
-  // State declarations MUST come first
   const [activeTab, setActiveTab] = useState('signin');
   const [showTutorial, setShowTutorial] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +24,6 @@ function HomePage() {
   const [showSignupConfirm, setShowSignupConfirm] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  // Scroll-based animation for tutorial section
   useEffect(() => {
     const handleScroll = () => {
       const tutorialSteps = document.querySelectorAll('.tutorial-step');
@@ -62,10 +60,8 @@ function HomePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [showTutorial]);
 
-  // Handler for primary CTA button - toggle tutorials
   function handlePrimaryCTA() {
     setShowTutorial(!showTutorial);
-    // Scroll to tutorial if opening it
     if (!showTutorial) {
       setTimeout(() => {
         const tutorialSection = document.querySelector('.tutorial-section');
@@ -76,7 +72,6 @@ function HomePage() {
     }
   }
 
-    // Handler for login form submit
     function handleLoginSubmit(e) {
       e.preventDefault();
       login();
@@ -85,14 +80,12 @@ function HomePage() {
       navigate('/dashboard');
     }
 
-    // Handler for signup form submit
     function handleSignupSubmit(e) {
       e.preventDefault();
       setShowSuccessModal(true);
       setActiveTab('signin');
     }
 
-    // Handler for closing modal
     function handleModalClose() {
       setShowSuccessModal(false);
       setActiveTab('signin');
