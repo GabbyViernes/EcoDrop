@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// ...existing code...
 import StatCard from '../components/StatCard';
 import NavigationBar from '../components/NavigationBar';
 import DisplayNamePrompt from '../components/DisplayNamePrompt';
@@ -8,7 +8,7 @@ import BinMapImage from '../assets/images/BinMapImage.png';
 import useBins from '../hooks/useBins';
 
 function DashboardPage() {
-  const navigate = useNavigate();
+  // ...existing code...
 
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
   const { bins } = useBins(); 
