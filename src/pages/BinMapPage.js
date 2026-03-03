@@ -42,15 +42,16 @@ const BinMapPage = () => {
   const [deletingBin, setDeletingBin] = useState(null);
 
   const {
-    bins,
-    showModal,
-    setShowModal,
-    formData,
-    handleFormChange,
-    handleFormSubmit,
-    handleEditBin,
-    handleDeleteBin,
-  } = useAddBinForm();
+  bins,
+  showModal,
+  setShowModal,
+  formData,
+  handleFormChange,
+  handleFormSubmit,
+  handleEditBin,
+  handleDeleteBin,
+  toastMessage,   // ← add this
+} = useAddBinForm();
 
   const filteredBins = bins.filter((bin) =>
     bin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -355,6 +356,12 @@ const BinMapPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+    {toastMessage && (
+      <div className="binmap-toast">
+        {toastMessage}
+      </div>
       )}
     </div>
   );
