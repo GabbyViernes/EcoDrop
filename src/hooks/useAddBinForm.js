@@ -4,11 +4,17 @@ import useBins from './useBins';
 export function useAddBinForm() {
   const { bins, addBin, editBin, deleteBin } = useBins();
   const [showModal, setShowModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const [formData, setFormData] = useState({
     binId: '', location: '', address: '', coordinates: '',
     capacity: '', type: '', collectionSchedule: '',
   });
+
+  function showToast(message) {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(''), 3500);
+  }
 
   function handleFormChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +38,7 @@ export function useAddBinForm() {
     };
 
     addBin(newBin);
-    alert(`EcoBin "${formData.binId}" at "${formData.location}" has been added!`);
+    showToast(`✅ EcoBin "${formData.binId}" added at ${formData.location}!`);
 
     setShowModal(false);
     setFormData({
@@ -43,10 +49,12 @@ export function useAddBinForm() {
 
   function handleEditBin(binId, updatedFormData) {
     editBin(binId, updatedFormData);
+    showToast(`✏️ EcoBin "${updatedFormData.binId}" updated successfully!`);
   }
 
   function handleDeleteBin(binId) {
     deleteBin(binId);
+    showToast(`🗑️ EcoBin "${binId}" has been removed.`);
   }
 
   return {
@@ -58,5 +66,6 @@ export function useAddBinForm() {
     handleFormSubmit,
     handleEditBin,
     handleDeleteBin,
+    toastMessage,
   };
 }

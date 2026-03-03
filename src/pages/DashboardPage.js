@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// ...existing code...
 import StatCard from '../components/StatCard';
 import NavigationBar from '../components/NavigationBar';
 import DisplayNamePrompt from '../components/DisplayNamePrompt';

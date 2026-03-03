@@ -5,14 +5,12 @@ export default function TutorialModal({ onClose }) {
   const [visibleSteps, setVisibleSteps] = useState(0);
 
   useEffect(() => {
-    // sequentially reveal each list item
     if (visibleSteps < 5) {
       const timer = setTimeout(() => setVisibleSteps(v => v + 1), 400);
       return () => clearTimeout(timer);
     }
   }, [visibleSteps]);
 
-  // generate a few confetti pieces for visual flair
   const confetti = Array.from({ length: 6 }).map((_, i) => ({
     id: i,
     emoji: ['🎉', '✨', '🌿', '💚'][i % 4],
