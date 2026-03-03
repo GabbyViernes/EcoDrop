@@ -1,11 +1,41 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 import '../styles/Homepage.css';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
 
 function HomePage() {
+    // Handler for primary CTA button
+    function handlePrimaryCTA() {
+      if (isLoggedIn) {
+        navigate('/dashboard');
+      } else {
+        setActiveTab('signin');
+      }
+    }
+
+    // Handler for login form submit
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      login();
+      setShowSuccessModal(false);
+      setActiveTab('signin');
+      navigate('/dashboard');
+    }
+
+    // Handler for signup form submit
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      setShowSuccessModal(true);
+      setActiveTab('signin');
+    }
+
+    // Handler for closing modal
+    function handleModalClose() {
+      setShowSuccessModal(false);
+      setActiveTab('signin');
+    }
   const navigate = useNavigate();
   const { login, isLoggedIn } = useAuth();
 
@@ -25,43 +55,6 @@ function HomePage() {
   const [showSignupConfirm, setShowSignupConfirm] = useState(false);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  function handlePrimaryCTA() {
-    if (isLoggedIn) {
-      navigate('/dashboard');
-      return;
-    }
-    navigate('/landing');
-  }
-
-  function handleLoginSubmit(e) {
-    e.preventDefault();
-    const username = email.split('@')[0];
-    login();                                        
-    localStorage.setItem('ecodropUser', username);  
-    navigate('/dashboard', { replace: true });
-  }
-
-  function handleSignupSubmit(e) {
-    e.preventDefault();
-    if (signupPassword !== signupConfirmPassword) {
-      alert('Passwords do not match.');
-      return;
-    }
-    setShowSuccessModal(true);
-  }
-
-  function handleModalClose() {
-    setShowSuccessModal(false);
-    setSignupFullName('');
-    setSignupAdminId('');
-    setSignupEmail('');
-    setSignupPassword('');
-    setSignupConfirmPassword('');
-    setShowSignupPassword(false);
-    setShowSignupConfirm(false);
-    setActiveTab('signin');
-  }
 
   return (
     <div className="home-page-shell">
@@ -113,7 +106,6 @@ function HomePage() {
         </section>
 
         <div className="hero-right-wrapper">
-
           <div className="home-tab-row">
             <button
               type="button"
@@ -133,11 +125,9 @@ function HomePage() {
           </div>
 
           <aside className="hero-glass-card">
-
             {activeTab === 'signin' && (
               <>
                 <p>Welcome back, continue your EcoDrop journey.</p>
-
                 <form className="home-login-form" onSubmit={handleLoginSubmit}>
                   <div className="home-form-group">
                     <input
@@ -149,7 +139,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -168,7 +157,6 @@ function HomePage() {
                       {showPassword ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <div className="home-form-options">
                     <label className="home-remember-me">
                       <input
@@ -182,18 +170,15 @@ function HomePage() {
                       Forgot Password?
                     </a>
                   </div>
-
                   <button type="submit" className="home-login-submit-btn">
                     Sign In
                   </button>
                 </form>
               </>
             )}
-
             {activeTab === 'signup' && (
               <>
                 <p>Join EcoDrop and start making an impact today.</p>
-
                 <form className="home-login-form" onSubmit={handleSignupSubmit}>
                   <div className="home-form-group">
                     <input
@@ -205,7 +190,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group">
                     <input
                       type="text"
@@ -216,7 +200,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group">
                     <input
                       type="email"
@@ -227,7 +210,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showSignupPassword ? 'text' : 'password'}
@@ -246,7 +228,6 @@ function HomePage() {
                       {showSignupPassword ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showSignupConfirm ? 'text' : 'password'}
@@ -265,7 +246,6 @@ function HomePage() {
                       {showSignupConfirm ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <button type="submit" className="home-login-submit-btn">
                     Create Account
                   </button>
@@ -277,7 +257,7 @@ function HomePage() {
       </main>
 
       <div className="home-footer-note">
-        © 2026 EcoDrop | Designed &amp; Developed with ♻ for a greener future. All rights reserved.
+        © 2026 EcoDrop | Designed & Developed with ♻ for a greener future. All rights reserved.
       </div>
 
       <button

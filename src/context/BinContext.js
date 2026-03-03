@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-const BinContext = createContext();
+export const BinContext = createContext();
 
 const INITIAL_BINS = [
   {
@@ -55,4 +55,3 @@ export const BinProvider = ({ children }) => {
   );
 };
 
-export const useBins = () => useContext(BinContext);

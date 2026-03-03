@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import '../styles/DashboardPage.css';
 
@@ -180,9 +180,9 @@ function NavigationBar() {
 
   return (
     <header className="dashboard-topbar">
-      <div className="brand-logo" onClick={() => navigate('/dashboard')}>
+      <header className="brand-logo" onClick={() => navigate('/dashboard')}>
         <img src={logoWord} alt="EcoDrop" className="brand-logo-img" />
-      </div>
+      </header>
 
       <nav className="dashboard-nav">
         <button

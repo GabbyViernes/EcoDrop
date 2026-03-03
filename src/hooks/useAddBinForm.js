@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useBins } from '../context/BinContext';
+import useBins from './useBins';
 
 export function useAddBinForm() {
   const { bins, addBin } = useBins(); 

@@ -9,7 +9,8 @@ import DepositLogsPage from './pages/DepositLogsPage';
 import SignupPage from './pages/SignupPage';
 import HelpPage from './pages/HelpPage';
 import SettingsPage from './pages/SettingsPage';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
+import useAuth from './hooks/useAuth';
 import { BinProvider } from './context/BinContext'; // <-- ADDED THIS
 
 function ProtectedRoute({ children }) {
