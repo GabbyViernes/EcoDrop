@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import BinMapImage from '../assets/images/BinMapImage.png';
+import TrubbishPin from '../assets/images/TrubbishPin.png';
 import { useAddBinForm } from '../hooks/useAddBinForm';
 import '../styles/BinMapPage.css';
 
-const EMPTY_FORM = {
-  binId: '', location: '', address: '', coordinates: '',
-  capacity: '', type: '', collectionSchedule: '',
+// Stable positions for the default bins
+const SEEDED_POSITIONS = {
+  'BIN-001': { top: 38, left: 22 },
+  'BIN-002': { top: 55, left: 58 },
+  'BIN-003': { top: 28, left: 72 },
 };
+
+// Stores randomly generated positions for newly added bins (persists across renders)
+const generatedPositions = {};
+
+function getPinPosition(binId) {
+  if (SEEDED_POSITIONS[binId]) return SEEDED_POSITIONS[binId];
+  if (generatedPositions[binId]) return generatedPositions[binId];
+  const pos = {
+    top: Math.floor(Math.random() * 55) + 12,
+    left: Math.floor(Math.random() * 65) + 10,
+  };
+  generatedPositions[binId] = pos;
+  return pos;
+}
 
 const BinMapPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [hoveredBinId, setHoveredBinId] = useState(null);
+  const [tooltipSide, setTooltipSide] = useState('right');
 
-  // Edit modal state
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingBin, setEditingBin] = useState(null);
-  const [editFormData, setEditFormData] = useState(EMPTY_FORM);
+  const [editFormData, setEditFormData] = useState({
+    binId: '', location: '', address: '', coordinates: '',
+    capacity: '', type: '', collectionSchedule: '',
+  });
 
-  // Delete confirm modal state
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingBin, setDeletingBin] = useState(null);
 
@@ -37,12 +57,12 @@ const BinMapPage = () => {
     bin.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // ── Add modal overlay click
-  function handleAddOverlayClick(e) {
-    if (e.target.classList.contains('modal-overlay')) setShowModal(false);
+  function handlePinMouseEnter(binId) {
+    const pos = getPinPosition(binId);
+    setTooltipSide(pos.left > 58 ? 'left' : 'right');
+    setHoveredBinId(binId);
   }
 
-  // ── Open edit modal, pre-fill form
   function openEditModal(bin) {
     setEditingBin(bin);
     setEditFormData({
@@ -52,7 +72,7 @@ const BinMapPage = () => {
       coordinates: bin.coordinates || '',
       capacity: bin.capacity || '',
       type: bin.type || '',
-      collectionSchedule: bin.collectionSchedule || '',
+      collectionSchedule: bin.collectionSchedule || bin.nextCollection || '',
     });
     setShowEditModal(true);
   }
@@ -69,7 +89,6 @@ const BinMapPage = () => {
     setEditingBin(null);
   }
 
-  // ── Open delete confirm modal
   function openDeleteModal(bin) {
     setDeletingBin(bin);
     setShowDeleteModal(true);
@@ -81,7 +100,6 @@ const BinMapPage = () => {
     setDeletingBin(null);
   }
 
-  // Shared form fields renderer (used by both Add and Edit modals)
   function renderFormFields(data, onChange) {
     return (
       <>
@@ -135,7 +153,6 @@ const BinMapPage = () => {
   return (
     <div className="binmap-page-shell">
       <div className="hill h1" /><div className="hill h2" /><div className="hill h3" />
-
       <NavigationBar />
 
       <main className="binmap-main">
@@ -153,8 +170,54 @@ const BinMapPage = () => {
         </header>
 
         <div className="binmap-content">
+
           <div className="map-wrapper">
-            <img src={BinMapImage} alt="Bin Map" className="binmap-image" />
+            <div className="map-pin-container">
+              <img src={BinMapImage} alt="Bin Map" className="binmap-image" />
+
+              {bins.map((bin) => {
+                const pos = getPinPosition(bin.id);
+                const fillColor = bin.fillLevel >= 80 ? '#e74c3c'
+                  : bin.fillLevel >= 50 ? '#f39c12' : '#4caf50';
+                const isHovered = hoveredBinId === bin.id;
+
+                return (
+                  <div
+                    key={bin.id}
+                    className={`trubbish-pin-wrapper${isHovered ? ' pin-hovered' : ''}`}
+                    style={{ top: `${pos.top}%`, left: `${pos.left}%` }}
+                    onMouseEnter={() => handlePinMouseEnter(bin.id)}
+                    onMouseLeave={() => setHoveredBinId(null)}
+                  >
+                    <img src={TrubbishPin} alt={bin.id} className="trubbish-pin-img" />
+
+                    {isHovered && (
+                      <div className={`pin-tooltip pin-tooltip-${tooltipSide}`}>
+                        <div className="pin-tooltip-header">
+                          <span className="pin-tooltip-id">{bin.id}</span>
+                          <span className="pin-tooltip-status" style={{ backgroundColor: fillColor }}>
+                            {bin.status}
+                          </span>
+                        </div>
+                        <div className="pin-tooltip-location">📍 {bin.location}</div>
+                        <div className="pin-tooltip-row">
+                          <span>Fill Level</span>
+                          <span style={{ color: fillColor, fontWeight: 700 }}>{bin.fillLevel}%</span>
+                        </div>
+                        <div className="pin-tooltip-bar-bg">
+                          <div className="pin-tooltip-bar"
+                            style={{ width: `${bin.fillLevel}%`, backgroundColor: fillColor }} />
+                        </div>
+                        <div className="pin-tooltip-row">
+                          <span>Capacity</span>
+                          <span>{bin.capacity}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="bin-cards-container">
@@ -162,7 +225,6 @@ const BinMapPage = () => {
               filteredBins.map((bin) => {
                 const fillColor = bin.fillLevel >= 80 ? '#e74c3c'
                   : bin.fillLevel >= 50 ? '#f39c12' : '#889063';
-
                 return (
                   <div className="bin-detail-card" key={bin.id}>
                     <div className="bin-detail-header">
@@ -171,39 +233,24 @@ const BinMapPage = () => {
                         <span className={`bin-status-badge ${bin.status.toLowerCase()}`}>
                           {bin.status}
                         </span>
-                        <button
-                          className="bin-action-btn edit-btn"
-                          onClick={() => openEditModal(bin)}
-                          title="Edit bin"
-                        >
-                          ✏️
-                        </button>
-                        <button
-                          className="bin-action-btn delete-btn"
-                          onClick={() => openDeleteModal(bin)}
-                          title="Delete bin"
-                        >
-                          🗑️
-                        </button>
+                        <button className="bin-action-btn edit-btn"
+                          onClick={() => openEditModal(bin)} title="Edit bin">✏️</button>
+                        <button className="bin-action-btn delete-btn"
+                          onClick={() => openDeleteModal(bin)} title="Delete bin">🗑️</button>
                       </div>
                     </div>
-
                     <p className="bin-location-name">{bin.location}</p>
                     <p className="bin-address">{bin.address}</p>
-
                     <div className="bin-fill-section">
                       <div className="bin-fill-label">
                         <span>Fill Level</span>
-                        <span className="bin-fill-percent" style={{ color: fillColor }}>
-                          {bin.fillLevel}%
-                        </span>
+                        <span className="bin-fill-percent" style={{ color: fillColor }}>{bin.fillLevel}%</span>
                       </div>
                       <div className="bin-fill-bar-bg">
                         <div className="bin-fill-bar"
                           style={{ width: `${bin.fillLevel}%`, backgroundColor: fillColor }} />
                       </div>
                     </div>
-
                     <div className="bin-info-grid">
                       <div className="bin-info-item">
                         <span className="bin-info-label">Type</span>
@@ -240,13 +287,12 @@ const BinMapPage = () => {
         </div>
       </main>
 
-      <button className="add-ecobin-btn" onClick={() => setShowModal(true)}>
-        + Add EcoBin
-      </button>
+      <button className="add-ecobin-btn" onClick={() => setShowModal(true)}>+ Add EcoBin</button>
 
-      {/* ── ADD MODAL ── */}
       {showModal && (
-        <div className="modal-overlay" onClick={handleAddOverlayClick}>
+        <div className="modal-overlay" onClick={(e) => {
+          if (e.target.classList.contains('modal-overlay')) setShowModal(false);
+        }}>
           <div className="modal-card">
             <div className="modal-header">
               <h3>Add New EcoBin</h3>
@@ -266,7 +312,6 @@ const BinMapPage = () => {
         </div>
       )}
 
-      {/* ── EDIT MODAL ── */}
       {showEditModal && (
         <div className="modal-overlay" onClick={(e) => {
           if (e.target.classList.contains('modal-overlay')) setShowEditModal(false);
@@ -288,7 +333,6 @@ const BinMapPage = () => {
         </div>
       )}
 
-      {/* ── DELETE CONFIRM MODAL ── */}
       {showDeleteModal && (
         <div className="modal-overlay" onClick={(e) => {
           if (e.target.classList.contains('modal-overlay')) setShowDeleteModal(false);
@@ -302,17 +346,12 @@ const BinMapPage = () => {
               <div className="delete-confirm-icon">🗑️</div>
               <p>Are you sure you want to delete <strong>{deletingBin?.id}</strong>?</p>
               <p className="delete-confirm-sub">
-                <strong>{deletingBin?.location}</strong> will be permanently removed.
-                This action cannot be undone.
+                <strong>{deletingBin?.location}</strong> will be permanently removed. This action cannot be undone.
               </p>
             </div>
             <div className="modal-actions">
-              <button type="button" className="modal-cancel-btn" onClick={() => setShowDeleteModal(false)}>
-                Cancel
-              </button>
-              <button type="button" className="modal-delete-confirm-btn" onClick={confirmDelete}>
-                Yes, Delete
-              </button>
+              <button type="button" className="modal-cancel-btn" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+              <button type="button" className="modal-delete-confirm-btn" onClick={confirmDelete}>Yes, Delete</button>
             </div>
           </div>
         </div>
