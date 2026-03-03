@@ -10,7 +10,7 @@ import SignupPage from './pages/SignupPage';
 import HelpPage from './pages/HelpPage';
 import SettingsPage from './pages/SettingsPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { BinProvider } from './context/BinContext'; // <-- ADDED THIS
+import { BinProvider } from './context/BinContext'; 
 
 function ProtectedRoute({ children }) {
   const { isLoggedIn } = useAuth();
@@ -20,16 +20,14 @@ function ProtectedRoute({ children }) {
 function App() {
   return (
     <AuthProvider>
-      <BinProvider> {/* <-- WRAPPED ROUTER WITH THIS */}
+      <BinProvider> 
         <Router>
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/help" element={<HelpPage />} />
-
             <Route path="/binmap" element={<BinMapPage />} />
-
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/depositlogs" element={<ProtectedRoute><DepositLogsPage /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
