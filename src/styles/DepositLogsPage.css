@@ -375,52 +375,147 @@
   }
 }
 
+/* ── DARK MODE ── */
+
 body.ecodrop-dark-theme .depositlogs-page-shell {
   background:
     radial-gradient(circle at 14% 10%, rgba(255,255,255,0.03) 0 6%, transparent 7%),
-    linear-gradient(180deg, #0f1a12 0%, #18241a 58%, #1e2e1e 100%);
+    linear-gradient(180deg, #0d1a10 0%, #15221a 58%, #1e2e20 100%);
+  color: #e0eedf;
 }
 
-body.ecodrop-dark-theme .hill.h1 { background: #1a2e1a; }
-body.ecodrop-dark-theme .hill.h2 { background: #152815; }
-body.ecodrop-dark-theme .hill.h3 { background: #102210; }
+body.ecodrop-dark-theme .hill.h1 { background: #162a16; }
+body.ecodrop-dark-theme .hill.h2 { background: #122312; }
+body.ecodrop-dark-theme .hill.h3 { background: #0e1e0e; }
 
-body.ecodrop-dark-theme .depositlogs-header,
-body.ecodrop-dark-theme .logs-table-card,
-body.ecodrop-dark-theme .logs-summary-card {
-  background: rgba(18, 28, 20, 0.88);
+body.ecodrop-dark-theme .depositlogs-header {
+  background: rgba(14, 22, 16, 0.95);
   border-color: rgba(124, 156, 125, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-body.ecodrop-dark-theme .depositlogs-title,
-body.ecodrop-dark-theme .logs-table-title {
-  color: #d9ead6;
+body.ecodrop-dark-theme .depositlogs-title {
+  color: #e8f5e6;
 }
 
 body.ecodrop-dark-theme .depositlogs-search-bar {
-  background: rgba(15, 23, 17, 0.95);
-  border-color: rgba(126, 168, 129, 0.2);
+  background: rgba(20, 32, 22, 0.95);
+  border-color: rgba(126, 168, 129, 0.22);
 }
 
 body.ecodrop-dark-theme .depositlogs-search-bar input {
-  color: #edf7ec;
+  color: #e0eedf;
+}
+
+body.ecodrop-dark-theme .depositlogs-search-bar input::placeholder {
+  color: #6a8c67;
+}
+
+body.ecodrop-dark-theme .logs-summary-card {
+  background: rgba(20, 32, 22, 0.88);
+  border-color: rgba(124, 156, 125, 0.14);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+body.ecodrop-dark-theme .logs-summary-card:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+body.ecodrop-dark-theme .summary-value {
+  color: #d4eed0;
+}
+
+body.ecodrop-dark-theme .summary-label {
+  color: #7fa07c;
+}
+
+body.ecodrop-dark-theme .logs-table-card {
+  background: rgba(20, 32, 22, 0.88);
+  border-color: rgba(124, 156, 125, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.ecodrop-dark-theme .logs-table-header-row {
+  border-bottom-color: rgba(124, 156, 125, 0.18);
+}
+
+body.ecodrop-dark-theme .logs-table-title {
+  color: #e8f5e6;
+}
+
+body.ecodrop-dark-theme .logs-count {
+  color: #8aab87;
+  background: rgba(124, 156, 125, 0.12);
+  border-color: rgba(124, 156, 125, 0.22);
+}
+
+body.ecodrop-dark-theme .logs-table thead tr {
+  background: rgba(53, 64, 36, 0.45);
 }
 
 body.ecodrop-dark-theme .logs-table th {
-  color: #a8bea5;
+  color: #c8ddc5;
+  border-bottom-color: rgba(124, 156, 125, 0.2);
+}
+
+body.ecodrop-dark-theme .sortable-th:hover {
+  background: rgba(60, 90, 60, 0.3);
+}
+
+body.ecodrop-dark-theme .sort-icon.active {
+  color: #b7d4b4;
+}
+
+body.ecodrop-dark-theme .row-even {
+  background: rgba(20, 34, 22, 0.65);
+}
+
+body.ecodrop-dark-theme .row-odd {
+  background: rgba(30, 46, 32, 0.5);
+}
+
+body.ecodrop-dark-theme .logs-table tbody tr:hover td {
+  background: rgba(60, 90, 60, 0.3);
 }
 
 body.ecodrop-dark-theme .logs-table td {
-  color: #d4e8d2;
-  border-color: rgba(124, 156, 125, 0.1);
+  border-bottom-color: rgba(124, 156, 125, 0.1);
 }
 
-body.ecodrop-dark-theme .row-even { background: rgba(22, 34, 24, 0.6); }
-body.ecodrop-dark-theme .row-odd  { background: rgba(30, 46, 32, 0.5); }
+body.ecodrop-dark-theme .txn-id-badge {
+  color: #b7d4b4;
+  background: rgba(124, 156, 125, 0.12);
+  border-color: rgba(124, 156, 125, 0.25);
+}
 
-body.ecodrop-dark-theme .user-name  { color: #d9ead6; }
-body.ecodrop-dark-theme .user-id    { color: #7fa07c; }
-body.ecodrop-dark-theme .weight-cell { color: #b7d4b4; }
-body.ecodrop-dark-theme .timestamp-cell { color: #8aab87; }
-body.ecodrop-dark-theme .summary-value { color: #c8e0c5; }
-body.ecodrop-dark-theme .summary-label { color: #7fa07c; }
+body.ecodrop-dark-theme .user-name {
+  color: #e0eedf;
+}
+
+body.ecodrop-dark-theme .user-id {
+  color: #7fa07c;
+}
+
+body.ecodrop-dark-theme .bin-id-pill {
+  color: #7ec8d8;
+  background: rgba(44, 140, 160, 0.12);
+  border-color: rgba(44, 140, 160, 0.25);
+}
+
+body.ecodrop-dark-theme .weight-cell {
+  color: #b7d4b4;
+}
+
+body.ecodrop-dark-theme .timestamp-cell {
+  color: #8aab87;
+}
+
+body.ecodrop-dark-theme .reward-badge {
+  color: #e5c97a;
+  background: rgba(207, 187, 100, 0.12);
+  border-color: rgba(207, 187, 100, 0.25);
+}
+
+body.ecodrop-dark-theme .logs-empty {
+  color: #7fa07c;
+}

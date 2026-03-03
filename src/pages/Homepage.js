@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 import '../styles/Homepage.css';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
@@ -10,12 +10,11 @@ function HomePage() {
   const { login, isLoggedIn } = useAuth();
 
   const [activeTab, setActiveTab] = useState('signin');
-
+  const [showTutorial, setShowTutorial] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-
   const [signupFullName, setSignupFullName] = useState('');
   const [signupAdminId, setSignupAdminId] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
@@ -23,45 +22,75 @@ function HomePage() {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [showSignupConfirm, setShowSignupConfirm] = useState(false);
-
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const tutorialSteps = document.querySelectorAll('.tutorial-step');
+      const tutorialHighlight = document.querySelector('.tutorial-highlight');
+      const tutorialSection = document.querySelector('.tutorial-section');
+
+      if (tutorialSection && showTutorial) {
+        const rect = tutorialSection.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          tutorialSection.classList.add('fade-in');
+        }
+      }
+
+      tutorialSteps.forEach(step => {
+        const rect = step.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          step.classList.add('fade-in');
+        }
+      });
+
+      if (tutorialHighlight) {
+        const rect = tutorialHighlight.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          tutorialHighlight.classList.add('fade-in');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showTutorial]);
+
   function handlePrimaryCTA() {
-    if (isLoggedIn) {
+    setShowTutorial(!showTutorial);
+    if (!showTutorial) {
+      setTimeout(() => {
+        const tutorialSection = document.querySelector('.tutorial-section');
+        if (tutorialSection) {
+          tutorialSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      login();
+      setShowSuccessModal(false);
+      setActiveTab('signin');
       navigate('/dashboard');
-      return;
     }
-    navigate('/landing');
-  }
 
-  function handleLoginSubmit(e) {
-    e.preventDefault();
-    const username = email.split('@')[0];
-    login();                                        
-    localStorage.setItem('ecodropUser', username);  
-    navigate('/dashboard', { replace: true });
-  }
-
-  function handleSignupSubmit(e) {
-    e.preventDefault();
-    if (signupPassword !== signupConfirmPassword) {
-      alert('Passwords do not match.');
-      return;
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      setShowSuccessModal(true);
+      setActiveTab('signin');
     }
-    setShowSuccessModal(true);
-  }
 
-  function handleModalClose() {
-    setShowSuccessModal(false);
-    setSignupFullName('');
-    setSignupAdminId('');
-    setSignupEmail('');
-    setSignupPassword('');
-    setSignupConfirmPassword('');
-    setShowSignupPassword(false);
-    setShowSignupConfirm(false);
-    setActiveTab('signin');
-  }
+    function handleModalClose() {
+      setShowSuccessModal(false);
+      setActiveTab('signin');
+    }
+
 
   return (
     <div className="home-page-shell">
@@ -86,7 +115,7 @@ function HomePage() {
               className="btn btn-primary btn-lg"
               onClick={handlePrimaryCTA}
             >
-              {isLoggedIn ? 'Go to Dashboard' : 'Start Recycling'}
+                      {isLoggedIn ? 'Go to Dashboard' : 'Start Recycling'}
             </button>
             <button
               type="button"
@@ -113,7 +142,6 @@ function HomePage() {
         </section>
 
         <div className="hero-right-wrapper">
-
           <div className="home-tab-row">
             <button
               type="button"
@@ -133,11 +161,9 @@ function HomePage() {
           </div>
 
           <aside className="hero-glass-card">
-
             {activeTab === 'signin' && (
               <>
                 <p>Welcome back, continue your EcoDrop journey.</p>
-
                 <form className="home-login-form" onSubmit={handleLoginSubmit}>
                   <div className="home-form-group">
                     <input
@@ -149,7 +175,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -168,7 +193,6 @@ function HomePage() {
                       {showPassword ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <div className="home-form-options">
                     <label className="home-remember-me">
                       <input
@@ -182,18 +206,15 @@ function HomePage() {
                       Forgot Password?
                     </a>
                   </div>
-
                   <button type="submit" className="home-login-submit-btn">
                     Sign In
                   </button>
                 </form>
               </>
             )}
-
             {activeTab === 'signup' && (
               <>
                 <p>Join EcoDrop and start making an impact today.</p>
-
                 <form className="home-login-form" onSubmit={handleSignupSubmit}>
                   <div className="home-form-group">
                     <input
@@ -205,7 +226,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group">
                     <input
                       type="text"
@@ -216,7 +236,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group">
                     <input
                       type="email"
@@ -227,7 +246,6 @@ function HomePage() {
                       className="home-form-input"
                     />
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showSignupPassword ? 'text' : 'password'}
@@ -246,7 +264,6 @@ function HomePage() {
                       {showSignupPassword ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <div className="home-form-group home-password-group">
                     <input
                       type={showSignupConfirm ? 'text' : 'password'}
@@ -265,7 +282,6 @@ function HomePage() {
                       {showSignupConfirm ? '👁️' : '👁️‍🗨️'}
                     </button>
                   </div>
-
                   <button type="submit" className="home-login-submit-btn">
                     Create Account
                   </button>
@@ -276,8 +292,61 @@ function HomePage() {
         </div>
       </main>
 
+      {showTutorial && (
+      <section className="tutorial-section pop-in">
+        <div className="tutorial-container">
+          <h1 className="tutorial-title">How to Recycle with EcoDrop</h1>
+          
+          <div className="tutorial-steps-grid">
+            <div className="tutorial-steps-top">
+              <div className="tutorial-step">
+                <div className="step-badge">Step 1</div>
+                <h2>Find Your Bin</h2>
+                <p>Locate a nearby <strong>EcoDrop smart bin</strong> using our interactive community map or bin locator feature.</p>
+                <div className="step-icon">📍</div>
+              </div>
+
+              <div className="tutorial-step">
+                <div className="step-badge">Step 2</div>
+                <h2>Check & Prepare</h2>
+                <p>Ensure your <strong>packaging is clean and dry</strong> – bubble wrap, plastic mailers, and safe materials only.</p>
+                <div className="step-icon">✅</div>
+              </div>
+
+              <div className="tutorial-step">
+                <div className="step-badge">Step 3</div>
+                <h2>Scan & Drop</h2>
+                <p>Use the bin's <strong>QR code scanner</strong> or smart display to verify, then safely drop your items inside.</p>
+                <div className="step-icon">📱</div>
+              </div>
+            </div>
+
+            <div className="tutorial-steps-bottom" role="group" aria-label="Additional steps">
+              <div className="tutorial-step small-step">
+                <div className="step-badge">Step 4</div>
+                <h2>Get Rewards</h2>
+                <p>Our <strong>IoT load cells</strong> verify weight and automatically credit your account with eco-points!</p>
+                <div className="step-icon">🎉</div>
+              </div>
+
+              <div className="tutorial-step small-step">
+                <div className="step-badge">Step 5</div>
+                <h2>Track Impact</h2>
+                <p>Monitor your <strong>recycling progress</strong> and eco points on your personalized dashboard.</p>
+                <div className="step-icon">📊</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="tutorial-highlight">
+            <p className="highlight-text">🌱 <strong>Every drop matters!</strong> Together, we're transforming e-commerce waste into sustainability. Start your eco journey today!</p>
+          </div>
+        </div>
+      </section>
+      )}
+
       <div className="home-footer-note">
-        © 2026 EcoDrop | Designed &amp; Developed with ♻ for a greener future. All rights reserved.
+        © 2026 EcoDrop | Designed & Developed with ♻ for a greener future. All rights reserved.
       </div>
 
       <button

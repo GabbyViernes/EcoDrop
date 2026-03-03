@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// ...existing code...
 import StatCard from '../components/StatCard';
 import NavigationBar from '../components/NavigationBar';
 import DisplayNamePrompt from '../components/DisplayNamePrompt';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png';
-import { useBins } from '../context/BinContext';  
+import useBins from '../hooks/useBins';
 
 function DashboardPage() {
-  const navigate = useNavigate();
 
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
   const { bins } = useBins(); 
@@ -43,14 +42,14 @@ function DashboardPage() {
       )}
 
       <main className="dashboard-content">
-        <section className="dashboard-title-card">
+        <div className="dashboard-title-card">
           <div>
             <h1>EcoDrop Admin Dashboard</h1>
             <p>Monitor bin activity, recycling progress, and recent deposit transactions.</p>
           </div>
-        </section>
+        </div>
 
-        <section className="analytics-grid">
+        <div className="analytics-grid">
           {stats.map(function (stat, index) {
             return (
               <StatCard
@@ -61,9 +60,9 @@ function DashboardPage() {
               />
             );
           })}
-        </section>
+        </div>
 
-        <section className="dashboard-middle-row">
+        <div className="dashboard-middle-row">
           <div className="map-card">
             <h3>Bin Locator Map</h3>
             <div className="map-container">
@@ -89,7 +88,7 @@ function DashboardPage() {
               })}
             </div>
           </div>
-        </section>
+        </div>
 
         <section className="logs-section">
           <h3>Recent Deposit Transactions</h3>

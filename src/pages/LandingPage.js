@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 import '../styles/LandingPage.css';
 import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
