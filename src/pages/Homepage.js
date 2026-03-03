@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import '../styles/Homepage.css';
@@ -6,14 +6,75 @@ import logoWord from '../assets/images/EcoDropLogoWord.png';
 import ecodrophomebg from '../assets/images/ecodrophomebg.png';
 
 function HomePage() {
-    // Handler for primary CTA button
-    function handlePrimaryCTA() {
-      if (isLoggedIn) {
-        navigate('/dashboard');
-      } else {
-        setActiveTab('signin');
+  const navigate = useNavigate();
+  const { login, isLoggedIn } = useAuth();
+
+  // State declarations MUST come first
+  const [activeTab, setActiveTab] = useState('signin');
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [signupFullName, setSignupFullName] = useState('');
+  const [signupAdminId, setSignupAdminId] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const [showSignupConfirm, setShowSignupConfirm] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // Scroll-based animation for tutorial section
+  useEffect(() => {
+    const handleScroll = () => {
+      const tutorialSteps = document.querySelectorAll('.tutorial-step');
+      const tutorialHighlight = document.querySelector('.tutorial-highlight');
+      const tutorialSection = document.querySelector('.tutorial-section');
+
+      if (tutorialSection && showTutorial) {
+        const rect = tutorialSection.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          tutorialSection.classList.add('fade-in');
+        }
       }
+
+      tutorialSteps.forEach(step => {
+        const rect = step.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          step.classList.add('fade-in');
+        }
+      });
+
+      if (tutorialHighlight) {
+        const rect = tutorialHighlight.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        if (isInView) {
+          tutorialHighlight.classList.add('fade-in');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showTutorial]);
+
+  // Handler for primary CTA button - toggle tutorials
+  function handlePrimaryCTA() {
+    setShowTutorial(!showTutorial);
+    // Scroll to tutorial if opening it
+    if (!showTutorial) {
+      setTimeout(() => {
+        const tutorialSection = document.querySelector('.tutorial-section');
+        if (tutorialSection) {
+          tutorialSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
+  }
 
     // Handler for login form submit
     function handleLoginSubmit(e) {
@@ -36,25 +97,7 @@ function HomePage() {
       setShowSuccessModal(false);
       setActiveTab('signin');
     }
-  const navigate = useNavigate();
-  const { login, isLoggedIn } = useAuth();
 
-  const [activeTab, setActiveTab] = useState('signin');
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const [signupFullName, setSignupFullName] = useState('');
-  const [signupAdminId, setSignupAdminId] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
-  const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
-  const [showSignupPassword, setShowSignupPassword] = useState(false);
-  const [showSignupConfirm, setShowSignupConfirm] = useState(false);
-
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   return (
     <div className="home-page-shell">
@@ -79,7 +122,7 @@ function HomePage() {
               className="btn btn-primary btn-lg"
               onClick={handlePrimaryCTA}
             >
-              {isLoggedIn ? 'Go to Dashboard' : 'Start Recycling'}
+                      {isLoggedIn ? 'Go to Dashboard' : 'Start Recycling'}
             </button>
             <button
               type="button"
@@ -255,6 +298,59 @@ function HomePage() {
           </aside>
         </div>
       </main>
+
+      {showTutorial && (
+      <section className="tutorial-section pop-in">
+        <div className="tutorial-container">
+          <h1 className="tutorial-title">How to Recycle with EcoDrop</h1>
+          
+          <div className="tutorial-steps-grid">
+            <div className="tutorial-steps-top">
+              <div className="tutorial-step">
+                <div className="step-badge">Step 1</div>
+                <h2>Find Your Bin</h2>
+                <p>Locate a nearby <strong>EcoDrop smart bin</strong> using our interactive community map or bin locator feature.</p>
+                <div className="step-icon">📍</div>
+              </div>
+
+              <div className="tutorial-step">
+                <div className="step-badge">Step 2</div>
+                <h2>Check & Prepare</h2>
+                <p>Ensure your <strong>packaging is clean and dry</strong> – bubble wrap, plastic mailers, and safe materials only.</p>
+                <div className="step-icon">✅</div>
+              </div>
+
+              <div className="tutorial-step">
+                <div className="step-badge">Step 3</div>
+                <h2>Scan & Drop</h2>
+                <p>Use the bin's <strong>QR code scanner</strong> or smart display to verify, then safely drop your items inside.</p>
+                <div className="step-icon">📱</div>
+              </div>
+            </div>
+
+            <div className="tutorial-steps-bottom" role="group" aria-label="Additional steps">
+              <div className="tutorial-step small-step">
+                <div className="step-badge">Step 4</div>
+                <h2>Get Rewards</h2>
+                <p>Our <strong>IoT load cells</strong> verify weight and automatically credit your account with eco-points!</p>
+                <div className="step-icon">🎉</div>
+              </div>
+
+              <div className="tutorial-step small-step">
+                <div className="step-badge">Step 5</div>
+                <h2>Track Impact</h2>
+                <p>Monitor your <strong>recycling progress</strong> and eco points on your personalized dashboard.</p>
+                <div className="step-icon">📊</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="tutorial-highlight">
+            <p className="highlight-text">🌱 <strong>Every drop matters!</strong> Together, we're transforming e-commerce waste into sustainability. Start your eco journey today!</p>
+          </div>
+        </div>
+      </section>
+      )}
 
       <div className="home-footer-note">
         © 2026 EcoDrop | Designed & Developed with ♻ for a greener future. All rights reserved.

@@ -519,6 +519,222 @@ body.ecodrop-dark-theme .home-tab-divider {
   color: #4a6b47;
 }
 
+/* Tutorial Section Styles */
+.tutorial-section {
+  width: 100%;
+  padding: 4rem 2rem;
+  background: transparent; /* use homepage background */
+  position: relative;
+  z-index: 5;
+  animation: none;
+}
+
+.tutorial-section.pop-in {
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50px);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.tutorial-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tutorial-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #354024;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tutorial-steps-grid {
+  margin-bottom: 2.5rem;
+}
+
+.tutorial-steps-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.tutorial-steps-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-top: 0.6rem;
+}
+
+.tutorial-step {
+  background: #ffffffcc;
+  padding: 2rem 1.8rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 26px rgba(34, 50, 36, 0.06);
+  text-align: center;
+  position: relative;
+  border-left: 4px solid rgba(140,180,120,0.22);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.2s ease;
+}
+
+.tutorial-step.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tutorial-step:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 14px 36px rgba(50, 80, 44, 0.12);
+  border-left-color: rgba(80,150,80,0.9);
+}
+
+.step-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #2f9e57, #1f7a3a);
+  color: #eaffef;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.tutorial-step h2 {
+  font-size: 1.9rem;
+  color: #254022;
+  margin: 1rem 0;
+  font-weight: 900;
+}
+
+.tutorial-step p {
+  color: #354024;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.tutorial-step strong {
+  color: #889063;
+  font-weight: 700;
+}
+
+.step-icon {
+  font-size: 3.2em;
+  margin-top: 1rem;
+  animation: bounce-subtle 1.8s ease-in-out infinite;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.tutorial-highlight {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.8rem;
+  border-radius: 12px;
+  border: 2px solid #889063;
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+}
+
+.tutorial-highlight.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: pulse 0.6s ease-out 0.4s forwards;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.highlight-text {
+  font-size: 1.2rem;
+  color: #354024;
+  font-weight: 500;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.highlight-text strong {
+  color: #4C3D19;
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tutorial-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .tutorial-steps-top {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .tutorial-steps-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tutorial-step {
+    padding: 1.5rem;
+  }
+
+  .step-icon {
+    font-size: 2.5em;
+  }
+
+  .highlight-text {
+    font-size: 1rem;
+  }
+}
+
 body.ecodrop-dark-theme .home-remember-me,
 body.ecodrop-dark-theme .home-forgot-password {
   color: #8abf8d;
@@ -536,4 +752,50 @@ body.ecodrop-dark-theme .hero-pill {
 
 body.ecodrop-dark-theme .home-footer-note {
   color: #7a9e77;
+}
+
+/* Dark Theme - Tutorial Section */
+body.ecodrop-dark-theme .tutorial-section {
+  background: linear-gradient(135deg, rgba(40, 50, 42, 0.95), rgba(50, 62, 52, 0.95));
+}
+
+body.ecodrop-dark-theme .tutorial-title {
+  color: #b7d4b4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body.ecodrop-dark-theme .tutorial-step {
+  background: rgba(30, 40, 32, 0.85);
+  border-left-color: #7a9e77;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.ecodrop-dark-theme .tutorial-step:hover {
+  border-left-color: #b7d4b4;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+body.ecodrop-dark-theme .tutorial-step h2 {
+  color: #b7d4b4;
+}
+
+body.ecodrop-dark-theme .tutorial-step p {
+  color: #9ab898;
+}
+
+body.ecodrop-dark-theme .tutorial-step strong {
+  color: #8abf8d;
+}
+
+body.ecodrop-dark-theme .tutorial-highlight {
+  background: rgba(30, 40, 32, 0.85);
+  border-color: #7a9e77;
+}
+
+body.ecodrop-dark-theme .highlight-text {
+  color: #9ab898;
+}
+
+body.ecodrop-dark-theme .highlight-text strong {
+  color: #b7d4b4;
 }
