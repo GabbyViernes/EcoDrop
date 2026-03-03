@@ -32,7 +32,6 @@ function App() {
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/depositlogs" element={<ProtectedRoute><DepositLogsPage /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
-
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>

@@ -12,7 +12,7 @@ export const useSearchLogs = (initialData) => {
     
     return initialData.filter(
       (item) =>
-        item.id.toLowersCase().includes(lowerQuery) ||
+        item.id.toLowerCase().includes(lowerQuery) ||
         item.user.toLowerCase().includes(lowerQuery) ||
         item.binId.toLowerCase().includes(lowerQuery)
     );

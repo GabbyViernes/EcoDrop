@@ -1,25 +1,16 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import useBins from '../hooks/useBins';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
 import '../styles/DashboardPage.css';
-
-const MOCK_SEARCH_DATA = [
-  { type: 'Transaction', label: 'TXN-001', id: 'TXN-001' },
-  { type: 'Transaction', label: 'TXN-002', id: 'TXN-002' },
-  { type: 'User', label: 'Jasmaine Rosallo', id: 'Jasmaine Rosallo' },
-  { type: 'User', label: 'Gabrielle Albert', id: 'Gabrielle Albert' },
-  { type: 'User', label: 'Gypsy Dane Carano-o', id: 'Gypsy Dane Carano-o' },
-  { type: 'User', label: 'Jessel Fabi', id: 'Jessel Fabi' },
-  { type: 'User', label: 'Maria Clara', id: 'Maria Clara' },
-  { type: 'Bin', label: 'BIN-001 (Limketkai)', id: 'BIN-001' },
-  { type: 'Bin', label: 'BIN-002 (SM Downtown)', id: 'BIN-002' }
-];
 
 function NavigationBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout } = useAuth();
+
+  const { bins } = useBins();
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,6 +22,26 @@ function NavigationBar() {
 
   const profileRef = useRef(null);
   const searchContainerRef = useRef(null);
+
+  const searchData = useMemo(() => {
+    const staticData = [
+      { type: 'Transaction', label: 'TXN-001', id: 'TXN-001' },
+      { type: 'Transaction', label: 'TXN-002', id: 'TXN-002' },
+      { type: 'User', label: 'Jasmaine Rosallo', id: 'Jasmaine Rosallo' },
+      { type: 'User', label: 'Gabrielle Albert', id: 'Gabrielle Albert' },
+      { type: 'User', label: 'Gypsy Dane Carano-o', id: 'Gypsy Dane Carano-o' },
+      { type: 'User', label: 'Jessel Fabi', id: 'Jessel Fabi' },
+      { type: 'User', label: 'Maria Clara', id: 'Maria Clara' }
+    ];
+
+    const dynamicBinData = bins.map(bin => ({
+      type: 'Bin',
+      label: `${bin.id} - ${bin.location}`,
+      id: bin.id
+    }));
+
+    return [...staticData, ...dynamicBinData];
+  }, [bins]);
 
   const loadProfileData = useCallback(function () {
     const savedDisplayName =
@@ -113,7 +124,7 @@ function NavigationBar() {
     setSearchQuery(value);
 
     if (value.trim()) {
-      const filtered = MOCK_SEARCH_DATA.filter(function (item) {
+      const filtered = searchData.filter(function (item) {
         return item.label.toLowerCase().includes(value.toLowerCase());
       });
 
