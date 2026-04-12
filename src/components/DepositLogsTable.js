@@ -41,8 +41,10 @@ const DepositLogsTable = ({ data }) => {
                   </span>
                 </td>
                 
-                {/* 4. Material Type */}
-                <td>{row.material}</td>
+                {/* 4. Material Type - Added small Capitalization logic */}
+                <td>
+                  {row.material ? row.material.charAt(0).toUpperCase() + row.material.slice(1) : 'N/A'}
+                </td>
                 
                 {/* 5. Weight in KG */}
                 <td className="weight-cell">{row.weight_kg} kg</td>

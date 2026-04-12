@@ -4,7 +4,7 @@ import NavigationBar from '../components/NavigationBar';
 import '../styles/DepositLogsPage.css';
 
 const MATERIAL_COLORS = {
-  Polyethylene: '#4a8c50',
+  Polyethylen: '#4a8c50',
   Plastic: '#3a7abf',
   Polypropylene: '#8b5e3c',
   'Mixed Plastic': '#7a5fa8',

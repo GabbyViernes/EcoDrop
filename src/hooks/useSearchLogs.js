@@ -3,29 +3,34 @@ import { useSearchParams } from 'react-router-dom';
 
 export const useSearchLogs = (initialData) => {
   const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get('q') || '';
+  
+  // .trim() handles cases where spaces are accidentally added to the search query
+  const searchQuery = (searchParams.get('q') || '').trim().toLowerCase();
 
   const filteredData = useMemo(() => {
+    // If no data or search query, return everything immediately
     if (!searchQuery || !initialData) return initialData;
-    const lowerQuery = searchQuery.toLowerCase();
     
     return initialData.filter((item) => {
-      // Format the ID as "TXN-001" to match what the user sees in the UI
+      // 1. Format the UI-friendly ID
       const formattedId = `TXN-${String(item.id).padStart(3, '0')}`.toLowerCase();
       
-      // Use the display fields from your Django Serializer
+      // 2. Safely capture the backend display fields
       const userName = (item.user_display || '').toLowerCase();
       const binId = (item.bin_display || '').toLowerCase();
       const material = (item.material || '').toLowerCase();
 
+      // 3. Return true if ANY of the fields match the query
       return (
-        formattedId.includes(lowerQuery) ||
-        userName.includes(lowerQuery) ||
-        binId.includes(lowerQuery) ||
-        material.includes(lowerQuery) // Added material search as well!
+        formattedId.includes(searchQuery) ||
+        userName.includes(searchQuery) ||
+        binId.includes(searchQuery) ||
+        material.includes(searchQuery)
       );
     });
   }, [searchQuery, initialData]);
 
-  return { filteredData };
+  return { filteredData, searchQuery };
 };
+
+export default useSearchLogs;
