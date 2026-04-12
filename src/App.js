@@ -28,7 +28,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/help" element={<HelpPage />} />
-            <Route path="/binmap" element={<BinMapPage />} />
+            <Route path="/binmap" element={<ProtectedRoute><BinMapPage /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/depositlogs" element={<ProtectedRoute><DepositLogsPage /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
