@@ -29,89 +29,93 @@ function DashboardPage() {
   }
 
   return (
-    <div className="dashboard-page-shell">
-      <div className="hill h1"></div>
-      <div className="hill h2"></div>
-      <div className="hill h3"></div>
+    <main className="dashboard-page-shell">
+      <section className="hills-section">
+        <div className="hill h1"></div>
+        <div className="hill h2"></div>
+        <div className="hill h3"></div>
+      </section>
 
-      <NavigationBar />
+      <nav>
+        <NavigationBar />
+      </nav>
 
       {showDisplayNamePrompt && (
         <DisplayNamePrompt onClose={handleCloseDisplayNamePrompt} />
       )}
 
-      <main className="dashboard-content">
-        <div className="dashboard-title-card">
-          <div>
-            <h1>EcoDrop Admin Dashboard</h1>
-            <p>Monitor bin activity, recycling progress, and recent deposit transactions.</p>
-          </div>
-        </div>
+      <header className="dashboard-title-card">
+        <h1>EcoDrop Admin Dashboard</h1>
+        <p>Monitor bin activity, recycling progress, and recent deposit transactions.</p>
+      </header>
 
-        <div className="analytics-grid">
-          {stats.map(function (stat, index) {
-            return (
-              <StatCard
-                key={index}
-                icon={stat.icon}
-                label={stat.label}
-                value={stat.value}
-              />
-            );
-          })}
-        </div>
+      <section className="analytics-grid">
+        {stats.map(function (stat, index) {
+          return (
+            <StatCard
+              key={index}
+              icon={stat.icon}
+              label={stat.label}
+              value={stat.value}
+            />
+          );
+        })}
+      </section>
 
-        <div className="dashboard-middle-row">
-          <div className="map-card">
-            <h3>Bin Locator Map</h3>
-            <div className="map-container">
-              <img src={BinMapImage} alt="Bin Map" className="bin-map-image" />
-            </div>
-          </div>
-
-          <div className="bin-status-card">
-            <h3>Live Bin Status</h3>
-            <div className="bin-list">
-              {bins.map((bin) => {
-                const isCritical = bin.fillLevel >= 80;
-                const barClass = isCritical ? 'critical' : (bin.fillLevel === 0 ? 'empty' : 'normal');
-                return (
-                  <div className="bin-item" key={bin.id}>
-                    <span>{bin.id} ({bin.location})</span>
-                    <div className="progress-container">
-                      <div className={`progress-bar ${barClass}`} style={{ width: `${bin.fillLevel}%` }}></div>
-                    </div>
-                    <span className="percent">{bin.fillLevel}%</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        <section className="logs-section">
-          <h3>Recent Deposit Transactions</h3>
-          <table className="logs-table">
-            <thead>
-              <tr>
-                <th>User ID</th>
-                <th>Timestamp</th>
-                <th>Location</th>
-                <th>Weight (kg)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#USER-9921</td>
-                <td>2026-02-16 10:30 AM</td>
-                <td>Limketkai Center</td>
-                <td>1.2 kg</td>
-              </tr>
-            </tbody>
-          </table>
+      <section className="dashboard-middle-row">
+        <section className="map-card">
+          <h3>Bin Locator Map</h3>
+          <section className="map-container">
+            <img src={BinMapImage} alt="Bin Map" className="bin-map-image" />
+          </section>
         </section>
-      </main>
-    </div>
+
+        <section className="bin-status-card">
+          <h3>Live Bin Status</h3>
+          <section className="bin-list">
+            {bins.map((bin) => {
+              const isCritical = bin.fillLevel >= 80;
+              const barClass = isCritical ? 'critical' : (bin.fillLevel === 0 ? 'empty' : 'normal');
+              return (
+                <section className="bin-item" key={bin.id}>
+                  <span>{bin.id} ({bin.location})</span>
+                  <section className="progress-container">
+                    <section className={`progress-bar ${barClass}`} style={{ width: `${bin.fillLevel}%` }}></section>
+                  </section>
+                  <span className="percent">{bin.fillLevel}%</span>
+                </section>
+              );
+            })}
+          </section>
+        </section>
+      </section>
+
+      <section className="logs-section">
+        <h3>Recent Deposit Transactions</h3>
+        <table className="logs-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Timestamp</th>
+              <th>Location</th>
+              <th>Weight (kg)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#USER-9921</td>
+              <td>2026-02-16 10:30 AM</td>
+              <td>Limketkai Center</td>
+              <td>1.2 kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer className="dashboard-footer">
+        {/* Add footer content here if needed */}
+      </footer>
+    </main>
   );
 }
 
