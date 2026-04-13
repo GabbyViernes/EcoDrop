@@ -2,22 +2,26 @@ import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export const useSearchLogs = (initialData) => {
- 
-  const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get('q') || '';
+    const [searchParams] = useSearchParams();
+    const searchQuery = (searchParams.get('q') || '').trim().toLowerCase();
 
-  const filteredData = useMemo(() => {
-    if (!searchQuery) return initialData;
-    const lowerQuery = searchQuery.toLowerCase();
-    
-    return initialData.filter(
-      (item) =>
-        item.id.toLowerCase().includes(lowerQuery) ||
-        item.user.toLowerCase().includes(lowerQuery) ||
-        item.binId.toLowerCase().includes(lowerQuery)
-    );
-  }, [searchQuery, initialData]);
+    const filteredData = useMemo(() => {
+        if (!searchQuery || !initialData) return initialData;
+        
+        return initialData.filter((item) => {
+            const formattedId = `TXN-${String(item.id).padStart(3, '0')}`.toLowerCase();
+            const userName = (item.user_display || '').toLowerCase();
+            const binId = (item.bin_display || '').toLowerCase();
+            const material = (item.material || '').toLowerCase();
 
-  
-  return { filteredData };
+            return (
+                formattedId.includes(searchQuery) ||
+                userName.includes(searchQuery) ||
+                binId.includes(searchQuery) ||
+                material.includes(searchQuery)
+            );
+        });
+    }, [searchQuery, initialData]);
+
+    return { filteredData, searchQuery };
 };
