@@ -1,5 +1,8 @@
-// PRODUCTION (Render)
-export const API_BASE_URL = "https://ecodrop-backend-1w8x.onrender.com/api";
+/**
+ * Centralized API configuration.
+ * On Render (Production), it uses the REACT_APP_API_URL environment variable.
+ * Locally, it falls back to the .env file or the local dev URL.
+ */
+export const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-// LOCAL (Uncomment for local testing)
-// export const API_BASE_URL = "http://127.0.0.1:8000/api";
+console.log("Using API Base URL:", API_BASE_URL);
