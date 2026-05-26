@@ -11,7 +11,7 @@ import HelpPage from './pages/HelpPage';
 import SettingsPage from './pages/SettingsPage';
 import { AuthProvider } from './context/AuthContext';
 import useAuth from './hooks/useAuth';
-import { BinProvider } from './context/BinContext'; // <-- ADDED THIS
+import { BinProvider } from './context/BinContext'; 
 
 function ProtectedRoute({ children }) {
   const { isLoggedIn } = useAuth();

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api/config';
 // Paki-check kung tama ang path ng NavigationBar component niyo
 import NavigationBar from '../components/NavigationBar'; 
 import DepositLogsTable from '../components/DepositLogsTable';
@@ -24,7 +25,7 @@ const DepositLogsPage = () => {
 
     const fetchLogs = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/api/deposit-logs/');
+            const res = await axios.get(`${API_BASE_URL}/deposit-logs/`);
             setLogs(res.data);
         } catch (err) {
             console.error(err);
@@ -40,7 +41,7 @@ const DepositLogsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://127.0.0.1:8000/api/deposit-logs/', formData);
+            await axios.post(`${API_BASE_URL}/deposit-logs/`, formData);
             setFormData({ user: '', bin: '', material: 'polyethylene', weight_kg: '' });
             setShowForm(false);
             fetchLogs();

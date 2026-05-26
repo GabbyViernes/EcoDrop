@@ -5,11 +5,16 @@ import DisplayNamePrompt from '../components/DisplayNamePrompt';
 import '../styles/DashboardPage.css';
 import BinMapImage from '../assets/images/BinMapImage.png';
 import useBins from '../hooks/useBins';
+import { API_BASE_URL } from '../api/config';
 
 function DashboardPage() {
-
   const [showDisplayNamePrompt, setShowDisplayNamePrompt] = useState(false);
   const { bins } = useBins(); 
+  
+  // New state variables for the Deposit Logs API
+  const [depositLogs, setDepositLogs] = useState([]);
+  const [loadingLogs, setLoadingLogs] = useState(true);
+
   const stats = [
     { label: 'Total Plastic Diverted', value: '1,240 kg', icon: '🌱' },
     { label: 'Active User Growth', value: '+15%', icon: '📈' },
@@ -17,11 +22,36 @@ function DashboardPage() {
   ];
 
   useEffect(() => {
+    // 1. Handle Display Name Prompt
     const savedDisplayName = localStorage.getItem('ecodropDisplayName');
-
     if (!savedDisplayName) {
       setShowDisplayNamePrompt(true);
     }
+
+    // 2. Fetch live deposit logs from Django
+    const fetchDepositLogs = async () => {
+      try {
+        const token = localStorage.getItem('ecodropToken');
+        const response = await fetch(`${API_BASE_URL}/deposit-logs/`, {
+          headers: {
+            'Content-Type': 'application/json',
+            // Include token just in case the endpoint requires authentication
+            'Authorization': token ? `Token ${token}` : ''
+          }
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch deposit logs');
+        
+        const data = await response.json();
+        setDepositLogs(data);
+      } catch (error) {
+        console.error("Error fetching deposit logs:", error);
+      } finally {
+        setLoadingLogs(false);
+      }
+    };
+
+    fetchDepositLogs();
   }, []);
 
   function handleCloseDisplayNamePrompt() {
@@ -94,19 +124,36 @@ function DashboardPage() {
           <table className="logs-table">
             <thead>
               <tr>
-                <th>User ID</th>
+                <th>User</th>
                 <th>Timestamp</th>
-                <th>Location</th>
+                <th>Bin ID</th>
                 <th>Weight (kg)</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#USER-9921</td>
-                <td>2026-02-16 10:30 AM</td>
-                <td>Limketkai Center</td>
-                <td>1.2 kg</td>
-              </tr>
+              {/* Dynamically render the fetched API data */}
+              {loadingLogs ? (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: 'center', padding: '15px' }}>
+                    Loading transactions...
+                  </td>
+                </tr>
+              ) : depositLogs.length === 0 ? (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: 'center', padding: '15px' }}>
+                    No recent transactions found.
+                  </td>
+                </tr>
+              ) : (
+                depositLogs.map((log) => (
+                  <tr key={log.id}>
+                    <td>{log.user_display || `User #${log.user}`}</td>
+                    <td>{new Date(log.timestamp).toLocaleString()}</td>
+                    <td>{log.bin_display || `Bin #${log.smart_bin}`}</td>
+                    <td>{log.weight_kg} kg</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </section>

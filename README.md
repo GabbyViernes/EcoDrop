@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# EcoDrop Web Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The web-based administration and user dashboard for the EcoDrop waste management system.
 
-## Available Scripts
+## 🚀 Deployment to Render
 
-In the project directory, you can run:
+This frontend is a React application. To deploy it to Render as a **Static Site**:
 
-### `npm start`
+1. **Push to GitHub**:
+   Ensure all latest changes (including API configurations) are pushed to your repository.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Create New Static Site**:
+   - Go to [dashboard.render.com](https://dashboard.render.com).
+   - Click **New +** and select **Static Site**.
+   - Connect your GitHub repository.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Configure Build Settings**:
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `build`
 
-### `npm test`
+4. **Add Environment Variables** (Optional but recommended):
+   If you want to use different API URLs without changing code, you can use `process.env.REACT_APP_API_URL` in `src/api/config.js`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Local Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Run Locally**:
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Configure Backend**:
+   By default, this frontend connects to the **Live Render Backend**. To test with a local backend, uncomment the local URL in `src/api/config.js`.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📂 Key Files
+- `src/api/config.js`: Centralized API configuration.
+- `src/context/AuthContext.js`: Global login state.
+- `src/context/BinContext.js`: Global bin data management.

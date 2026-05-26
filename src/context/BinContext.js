@@ -1,51 +1,57 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../api/config';
 
 export const BinContext = createContext();
 
-const INITIAL_BINS = [
-  {
-    id: 'BIN-001',
-    location: 'Limketkai Center',
-    address: 'Limketkai Dr, Cagayan de Oro, 9000 Misamis Oriental',
-    status: 'Critical',
-    fillLevel: 85,
-    lastEmptied: '2026-02-01 08:00 AM',
-    nextCollection: '2026-02-15 08:00 AM',
-    capacity: '20 kg',
-    currentLoad: '17 kg',
-    type: 'Polyethylene',
-    coordinates: '8.4822° N, 124.6472° E',
-  },
-  {
-    id: 'BIN-002',
-    location: 'SM Downtown Premier',
-    address: 'Claro M. Recto Ave, Cagayan de Oro',
-    status: 'Normal',
-    fillLevel: 45,
-    lastEmptied: '2026-02-12 10:30 AM',
-    nextCollection: '2026-02-16 08:00 AM',
-    capacity: '20 kg',
-    currentLoad: '9 kg',
-    type: 'Mixed Plastic',
-    coordinates: '8.4855° N, 124.6522° E',
-  }
-];
-
 export const BinProvider = ({ children }) => {
-  const [bins, setBins] = useState(() => {
-    const savedBins = localStorage.getItem('ecodrop_saved_bins');
-    if (savedBins) {
-      return JSON.parse(savedBins);
-    }
-    return INITIAL_BINS;
-  });
+  const [bins, setBins] = useState([]);
 
+  // Fetch bins from Django when the app loads
   useEffect(() => {
-    localStorage.setItem('ecodrop_saved_bins', JSON.stringify(bins));
-  }, [bins]);
+    fetch(`${API_BASE_URL}/bins/`)
+      .then(res => res.json())
+      .then(data => {
+        const liveBins = data.map(bin => ({
+          id: bin.bin_id || `BIN-${bin.id}`,
+          location: bin.location,
+          address: bin.address,
+          status: bin.status,
+          fillLevel: bin.fullness_percentage,
+          capacity: bin.capacity,
+          type: bin.bin_type,
+          nextCollection: bin.collection_schedule,
+          lastEmptied: 'Not recorded', 
+          currentLoad: '0 kg',
+          coordinates: `${bin.latitude || 0}°, ${bin.longitude || 0}°`
+        }));
+        setBins(liveBins);
+      })
+      .catch(err => console.error("Failed to fetch bins:", err));
+  }, []);
 
-  const addBin = (newBin) => {
-    setBins((prevBins) => [...prevBins, newBin]);
+  const addBin = async (newBin) => {
+    // Send to Django API
+    const response = await fetch(`${API_BASE_URL}/bins/`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('ecodropToken')}`
+      },
+      body: JSON.stringify({
+        bin_id: newBin.id,
+        location: newBin.location,
+        address: newBin.address,
+        capacity: newBin.capacity,
+        bin_type: newBin.type,
+        status: 'Normal',
+        fullness_percentage: 0
+      })
+    });
+
+    if (response.ok) {
+      const savedApiBin = await response.json();
+      setBins(prev => [...prev, { ...newBin, dbId: savedApiBin.id }]);
+    }
   };
 
   const editBin = (binId, updatedFormData) => {

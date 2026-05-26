@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { API_BASE_URL } from '../api/config';
 
 export const AuthContext = createContext(null);
 
@@ -7,12 +8,31 @@ export const AuthProvider = ({ children }) => {
     localStorage.getItem('ecodropLoggedIn') === 'true'
   );
 
-  const login = () => {
-    localStorage.setItem('ecodropLoggedIn', 'true');
-    setIsLoggedIn(true);
+  const login = async (username, password) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/login/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!response.ok) throw new Error('Login failed');
+
+      const data = await response.json();
+      
+      // Save the real Django token
+      localStorage.setItem('ecodropToken', data.token);
+      localStorage.setItem('ecodropLoggedIn', 'true');
+      setIsLoggedIn(true);
+      return true;
+    } catch (error) {
+      console.error("Authentication error:", error);
+      return false;
+    }
   };
 
   const logout = () => {
+    localStorage.removeItem('ecodropToken'); // Clear the token on logout
     localStorage.removeItem('ecodropLoggedIn');
     localStorage.removeItem('ecodropUser');
     localStorage.removeItem('ecodropDisplayName');
@@ -25,4 +45,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
