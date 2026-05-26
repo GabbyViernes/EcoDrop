@@ -28,7 +28,7 @@ function DashboardPage() {
       setShowDisplayNamePrompt(true);
     }
 
-    // 2. Fetch live deposit logs from Django
+    // 2. Fetch live deposit logs from Django and poll for updates
     const fetchDepositLogs = async () => {
       try {
         const token = localStorage.getItem('ecodropToken');
@@ -52,6 +52,11 @@ function DashboardPage() {
     };
 
     fetchDepositLogs();
+    const interval = setInterval(fetchDepositLogs, 5000); // Poll every 5 seconds
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   function handleCloseDisplayNamePrompt() {

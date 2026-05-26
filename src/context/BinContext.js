@@ -6,27 +6,34 @@ export const BinContext = createContext();
 export const BinProvider = ({ children }) => {
   const [bins, setBins] = useState([]);
 
-  // Fetch bins from Django when the app loads
+  // Fetch bins from Django and set up polling
   useEffect(() => {
-    fetch(`${API_BASE_URL}/bins/`)
-      .then(res => res.json())
-      .then(data => {
-        const liveBins = data.map(bin => ({
-          id: bin.bin_id || `BIN-${bin.id}`,
-          location: bin.location,
-          address: bin.address,
-          status: bin.status,
-          fillLevel: bin.fullness_percentage,
-          capacity: bin.capacity,
-          type: bin.bin_type,
-          nextCollection: bin.collection_schedule,
-          lastEmptied: 'Not recorded', 
-          currentLoad: '0 kg',
-          coordinates: `${bin.latitude || 0}°, ${bin.longitude || 0}°`
-        }));
-        setBins(liveBins);
-      })
-      .catch(err => console.error("Failed to fetch bins:", err));
+    const fetchBins = () => {
+      fetch(`${API_BASE_URL}/bins/`)
+        .then(res => res.json())
+        .then(data => {
+          const liveBins = data.map(bin => ({
+            id: bin.bin_id || `BIN-${bin.id}`,
+            location: bin.location,
+            address: bin.address,
+            status: bin.status,
+            fillLevel: bin.fullness_percentage,
+            capacity: bin.capacity,
+            type: bin.bin_type,
+            nextCollection: bin.collection_schedule,
+            lastEmptied: 'Not recorded', 
+            currentLoad: '0 kg',
+            coordinates: `${bin.latitude || 0}°, ${bin.longitude || 0}°`
+          }));
+          setBins(liveBins);
+        })
+        .catch(err => console.error("Failed to fetch bins:", err));
+    };
+
+    fetchBins(); // Initial fetch
+    const interval = setInterval(fetchBins, 10000); // Poll every 10 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
   const addBin = async (newBin) => {
