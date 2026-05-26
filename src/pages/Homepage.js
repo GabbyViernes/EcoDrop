@@ -72,18 +72,47 @@ function HomePage() {
     }
   }
 
-    function handleLoginSubmit(e) {
+    const handleLoginSubmit = async function (e) {
       e.preventDefault();
-      login();
-      setShowSuccessModal(false);
-      setActiveTab('signin');
-      navigate('/dashboard');
+      const success = await login(email, password);
+      if (success) {
+        setShowSuccessModal(false);
+        setActiveTab('signin');
+        navigate('/dashboard');
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
     }
 
-    function handleSignupSubmit(e) {
+    const handleSignupSubmit = async function (e) {
       e.preventDefault();
-      setShowSuccessModal(true);
-      setActiveTab('signin');
+      
+      if (signupPassword !== signupConfirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/register/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: signupEmail,
+            email: signupEmail,
+            password: signupPassword,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.username || errorData.detail || 'Signup failed');
+        }
+
+        setShowSuccessModal(true);
+        setActiveTab('signin');
+      } catch (error) {
+        alert(`Signup Error: ${error.message}`);
+      }
     }
 
     function handleModalClose() {
