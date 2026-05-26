@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../api/config';
 import '../styles/SignupPage.css';
 import backgroundImage from '../assets/images/EcoDrop-WebBG.png';
 import logoWord from '../assets/images/EcoDropLogoWord.png';
@@ -14,18 +15,42 @@ function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSignupSubmit = function (e) {
-  e.preventDefault();
+  const handleSignupSubmit = async function (e) {
+    e.preventDefault();
 
-  if (password !== confirmPassword) {
-    alert('Passwords do not match.');
-    return;
-  }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
 
-  alert('Account created successfully! You can now log in.');
-  navigate('/homepage', { replace: true });
-};
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/register/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: email, // Using email as username for Django
+          email: email,    // Also storing it in the email field
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Signup failed:", errorData);
+        throw new Error(errorData.username || errorData.detail || 'Signup failed');
+      }
+
+      alert('Account created successfully! You can now log in.');
+      navigate('/landing', { replace: true });
+    } catch (error) {
+      alert(`Signup Error: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div
@@ -137,8 +162,8 @@ function SignupPage() {
               </button>
             </div>
 
-            <button type="submit" className="signup-submit-btn">
-              Create Account
+            <button type="submit" className="signup-submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Creating Account...' : 'Create Account'}
             </button>
 
             <div className="signup-switch-row">

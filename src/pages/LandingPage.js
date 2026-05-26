@@ -27,10 +27,14 @@ function LandingPage() {
     setRememberMe(false);
   };
 
-const handleLoginSubmit = function (e) {
+const handleLoginSubmit = async function (e) {
   e.preventDefault();
-  login(email, password);
-  navigate('/dashboard', { replace: true });
+  const success = await login(email, password);
+  if (success) {
+    navigate('/dashboard', { replace: true });
+  } else {
+    alert('Login failed. Please check your credentials.');
+  }
 };
 
   return (

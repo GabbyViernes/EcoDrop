@@ -16,7 +16,11 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ username, password })
       });
 
-      if (!response.ok) throw new Error('Login failed');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Login failed response:", errorData);
+        throw new Error('Login failed');
+      }
 
       const data = await response.json();
       
