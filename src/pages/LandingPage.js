@@ -74,8 +74,8 @@ const handleLoginSubmit = async function (e) {
 
             <div className="form-group">
               <input
-                type="email"
-                placeholder="Email"
+                type="text"
+                placeholder="Email or Username"
                 value={email}
                 onChange={function (e) { setEmail(e.target.value); }}
                 required
